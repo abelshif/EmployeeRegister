@@ -1,4 +1,4 @@
-package LoginSystem;
+package OldProject;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,8 +10,8 @@ public class EmployeeMain {
 
     public static void main(String[] args) {
 
-        Doctor doctor = null;
-        Nurse nurse = null;
+        OldDoctor doctor = null;
+        OldNurse nurse = null;
         boolean bool = true;
 
         while (bool) {
@@ -27,10 +27,10 @@ public class EmployeeMain {
                     System.out.println("Select 'D' for doctor or 'N' for nurse");
                     String response = scanner.nextLine();
                     if (response.equalsIgnoreCase("D")) {
-                        doctor = new Doctor();
+                        doctor = new OldDoctor();
                         RegisterNewEmployee(doctor);
                     } else if (response.equalsIgnoreCase("N")) {
-                        nurse = new Nurse();
+                        nurse = new OldNurse();
                         RegisterNewEmployee(nurse);
                     }
                     break;
@@ -55,7 +55,7 @@ public class EmployeeMain {
 
     }
 
-    private static void RegisterNewEmployee(Employee employee) {
+    private static void RegisterNewEmployee(OldEmployee employee) {
         try {
 
             Scanner scanner = new Scanner(System.in);
@@ -90,7 +90,7 @@ public class EmployeeMain {
     }
 
     //Method ----- write on the file ------
-    private static void writeTofile(String employeeId,Employee employee) throws IOException {
+    private static void writeTofile(String employeeId, OldEmployee employee) throws IOException {
         PrintWriter printWriter = new PrintWriter( new FileWriter("EmployeeRegister.txt", true));
         printWriter.println(employeeId + "\t\t" + employee.getFirstName() + "\t\t" + employee.getLastName() +
                 "\t\t" + employee.getBirthDate() + "\t\t" + employee.getDepartment() + "\t\t" +

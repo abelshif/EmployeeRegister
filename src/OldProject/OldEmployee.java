@@ -1,8 +1,8 @@
-package LoginSystem;
+package OldProject;
 
 import java.util.Random;
 
-public abstract class Employee {
+public abstract class OldEmployee {
 
     private String firstName;
     private String lastName;
@@ -11,7 +11,7 @@ public abstract class Employee {
     private double salary;
     private String department;
 
-    public Employee(String firstName, String lastName, String gender, String birthDate, double salary, String department) {
+    public OldEmployee(String firstName, String lastName, String gender, String birthDate, double salary, String department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -20,7 +20,7 @@ public abstract class Employee {
         this.department = department;
     }
 
-    public Employee(){
+    public OldEmployee(){
 
     }
 

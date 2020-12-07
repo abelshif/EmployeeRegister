@@ -1,14 +1,14 @@
-package LoginSystem;
+package OldProject;
 
 import java.util.Random;
 
-public class Doctor extends Employee {
+public class OldDoctor extends OldEmployee {
 
-    public Doctor(String firstName, String lastName, String gender, String birthDate, double salary, String department) {
+    public OldDoctor(String firstName, String lastName, String gender, String birthDate, double salary, String department) {
         super(firstName, lastName, gender, birthDate, salary, department);
     }
 
-    public Doctor() {
+    public OldDoctor() {
         super();
     }
 
