@@ -10,13 +10,11 @@ import javax.print.Doc;
 public class Doctor extends Employee implements GenerateID{
     private String degree;
     private String specializtion;
-    private boolean underTraining;
 
-    public Doctor(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String degree, String specializtion, boolean underTraining) {
+    public Doctor(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String degree, String specializtion) {
         super(firstName, lastName, gender, birthDate, department, phoneNumber, salary);
         this.degree = degree;
         this.specializtion = specializtion;
-        this.underTraining = underTraining;
     }
 
     public String getDegree() {
@@ -31,13 +29,6 @@ public class Doctor extends Employee implements GenerateID{
         this.specializtion = specializtion;
     }
 
-    public boolean isUnderTraining() {
-        return underTraining;
-    }
-
-    public void setUnderTraining(boolean underTraining) {
-        this.underTraining = underTraining;
-    }
 
     @Override
     public void generateID() {

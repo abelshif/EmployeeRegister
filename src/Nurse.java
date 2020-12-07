@@ -8,28 +8,21 @@ import java.awt.*;
  * Copyright: MIT
  */
 public class Nurse extends Employee implements GenerateID {
-    private String certifications;
-    private String role;
+    private String certification;
 
-    public Nurse(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary) {
+    public Nurse(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String certification) {
         super(firstName, lastName, gender, birthDate, department, phoneNumber, salary);
+        this.certification = certification;
     }
 
     public String getCertifications() {
-        return certifications;
+        return certification;
     }
 
     public void setCertifications(String certifications) {
-        this.certifications = certifications;
+        this.certification = certification;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     @Override
     public void generateID() {
