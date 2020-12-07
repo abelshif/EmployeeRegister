@@ -35,4 +35,5 @@ public class Nurse extends Employee implements GenerateID {
     public void generateID() {
 
     }
+
 }

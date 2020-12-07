@@ -6,5 +6,5 @@
  * Copyright: MIT
  */
 public interface GenerateID {
-    public void generateID();
+    void generateID();
 }

@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Created by Axel Jeansson
  * Date: 2020-11-30
@@ -5,7 +8,7 @@
  * Project: AOD2Employee
  * Copyright: MIT
  */
-public class Employee {
+public class Employee implements GenerateID {
     private String firstName;
     private String lastName;
     private String gender;
@@ -14,6 +17,8 @@ public class Employee {
     private String department;
     //private Department department?;
     private String phoneNumber;
+
+    public Employee(){}
 
     public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary){
         this.firstName = firstName;
@@ -70,5 +75,11 @@ public class Employee {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+
+    @Override
+    public void generateID() {
+
     }
 }
