@@ -15,7 +15,7 @@ public class HomePage extends JFrame {
 
         homePagePanel.setLayout(null);
         homePagePanel.setVisible(true);
-        homePagePanel.setBackground(Color.CYAN);
+        homePagePanel.setBackground(Color.WHITE);
 
         add(homePagePanel);
         setTitle("Home page");
