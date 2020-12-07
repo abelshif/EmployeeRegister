@@ -15,7 +15,6 @@ public class Employee implements GenerateID {
     private String birthDate;
     private double salary;
     private String department;
-    //private Department department?;
     private String phoneNumber;
 
     public Employee(){}

@@ -9,10 +9,11 @@ import java.awt.*;
  */
 public class Nurse extends Employee implements GenerateID {
     private String certifications;
-    private String role;
 
-    public Nurse(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary) {
+
+    public Nurse(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String certifications) {
         super(firstName, lastName, gender, birthDate, department, phoneNumber, salary);
+        this.certifications = certifications;
     }
 
     public String getCertifications() {
@@ -21,14 +22,6 @@ public class Nurse extends Employee implements GenerateID {
 
     public void setCertifications(String certifications) {
         this.certifications = certifications;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     @Override

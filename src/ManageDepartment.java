@@ -3,7 +3,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.List;
 /**
  * Created by Salah Abdinoor
  * 12/3/2020
@@ -13,16 +13,18 @@ import java.awt.event.ActionListener;
  */
 public class ManageDepartment extends JFrame implements ActionListener {
 
-    Department surgery = new Department("Surgery", 25, "third floor - first ward ");
-    Department anaesthetics = new Department("Anaesthetics", 15, "third floor - second ward");
-    Department cardiology = new Department("Cardiology", 10, "second floor - first ward");
-    Department criticalCare = new Department("Critical care", 30, "first floor - fifth ward");
+    DAO dao = new DAO();
+    Employee employee = new Employee();
+
+    Department surgery = new Department("Surgery", dao.surgeryList.size(), "third floor - first ward ");
+    Department anaesthetics = new Department("Anaesthetics", dao.anaestheticsList.size(), "third floor - second ward");
+    Department cardiology = new Department("Cardiology", dao.cardiologyList.size(), "second floor - first ward");
+    Department criticalCare = new Department("Critical Care", dao.criticalCareList.size(), "first floor - fifth ward");
 
     private final String surgeryCase = "Surgery";
     private final String anaestheticsCase = "Anaesthetics";
     private final String cardiologyCase = "Cardiology";
-    private final String criticalCareCase = "Critical care";
-
+    private final String criticalCareCase = "Critical Care";
 
     JPanel panel = new JPanel();
     JLabel label = new JLabel("List of Departments");
@@ -67,22 +69,33 @@ public class ManageDepartment extends JFrame implements ActionListener {
 
     }
 
+    public List<Employee> findDepartmentList() {
+
+        switch (listOfDepartments.getSelectedItem().toString()) {
+            case surgeryCase -> { return dao.surgeryList; }
+            case anaestheticsCase -> {  return dao.anaestheticsList; }
+            case cardiologyCase -> { return dao.cardiologyList; }
+            case criticalCareCase -> {return dao.criticalCareList; }
+        }
+
+        return null;
+
+    }
+
     public static void main(String[] args) {
 
         new ManageDepartment();
     }
 
 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == searchDepartment) {
 
-            switch (listOfDepartments.getSelectedItem().toString()) {
-                case surgeryCase -> { System.out.println("Name: " + surgery.getName() + "\nLocation: " + surgery.getLocation() + "\nNumber of employees: " + surgery.getNumberOfEmployees() + "\n"); }
-                case anaestheticsCase -> { System.out.println("Name: " + anaesthetics.getName() + "\nLocation: " + anaesthetics.getLocation() + "\nNumber of employees: " + anaesthetics.getNumberOfEmployees() + "\n"); }
-                case cardiologyCase -> { System.out.println("Name: " + cardiology.getName() + "\nLocation: " + cardiology.getLocation() + "\nNumber of employees: " + cardiology.getNumberOfEmployees() + "\n"); }
-                case criticalCareCase -> { System.out.println("Name: " + criticalCare.getName() + "\nLocation: " + criticalCare.getLocation() + "\nNumber of employees: " + criticalCare.getNumberOfEmployees() + "\n"); }
-            }
+            dispose();
+            new ManageEmployees(findDepartmentList());
 
             }
         }

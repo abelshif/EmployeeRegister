@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Created by Salah Abdinoor
  * 11/30/2020
@@ -10,6 +12,7 @@ public class Department {
     private String name;
     private int numberOfEmployees;
     private String location;
+
 
 
     public Department(){
