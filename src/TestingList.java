@@ -52,39 +52,66 @@ public class TestingList {
         }
     }
 
+    private void AddNewEmployee(String filePath, List<Employee> list) throws IOException {
+        writer = new FileWriter(filePath, true);
+
+        firstName = JOptionPane.showInputDialog("Förnamn?");
+        lastName = JOptionPane.showInputDialog("Efternamn?");
+        gender = JOptionPane.showInputDialog("Kön");
+        birthDate = JOptionPane.showInputDialog("Födelsedag (xxxx-xx-xx)?");
+        department = JOptionPane.showInputDialog("Avdelning?");
+        phoneNumber = JOptionPane.showInputDialog("Telefonnummer?");
+        String inputDialog = JOptionPane.showInputDialog("Lön?");
+        salary = Double.parseDouble(inputDialog);
+        specialization = JOptionPane.showInputDialog("Övrigt?");
+        System.out.println("Färdig");
+        Employee employee = new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization);
+        writer.write("\n"+employee.writeInfo());
+
+        writer.close();
+
+
+    }
+
     public void ReadFromList(String filePath,List<Employee> list) throws IOException, ArrayIndexOutOfBoundsException{
         System.out.println(filePath);
-        s = new Scanner(new FileReader(filePath));
-        try {
-            while (s.hasNextLine()) {
-                data = s.nextLine();
-                System.out.println(data);
-                String[] temp = data.split(",");
-                firstName = temp[0];
-                lastName = temp[1];
-                gender = temp[2];
-                birthDate = temp[3];
-                department = temp[4];
-                phoneNumber = temp[5];
-                salary = Double.parseDouble(temp[6]);
-                specialization = temp[7];
+        int input = JOptionPane.showConfirmDialog(null, "Vill du lägga till ny anställd?");
+        if (input == 0){
+            AddNewEmployee(filePath, list);
+        }
+        else {
+            s = new Scanner(new FileReader(filePath));
+            try {
+                while (s.hasNextLine()) {
+                    data = s.nextLine();
+                    System.out.println(data);
+                    String[] temp = data.split(",");
+                    firstName = temp[0];
+                    lastName = temp[1];
+                    gender = temp[2];
+                    birthDate = temp[3];
+                    department = temp[4];
+                    phoneNumber = temp[5];
+                    salary = Double.parseDouble(temp[6]);
+                    specialization = temp[7];
 
-                list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization));
+                    list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization));
+                }
+                s.close();
+
+                for (Employee e : list
+                ) {
+                    e.printInfo();
+                }
+
+
+                System.out.println("----------------------------------------------");
+
+
+                //WriteToList(list, filePath);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
             }
-            s.close();
-
-            for (Employee e:list
-            ) {
-                e.printInfo();
-            }
-
-            System.out.println("----------------------------------------------");
-
-            list.add(new Employee("Oscar","Johansson","Man","19939393",department,"0765420340",38888,"Fobollsproffs"));
-
-            //WriteToList(list, filePath);
-        }catch (ArrayIndexOutOfBoundsException e){
-            e.printStackTrace();
         }
 
     }
@@ -102,9 +129,8 @@ public class TestingList {
         }
         System.out.println("----------------------------------------------");
         writer.close();
-
-
     }
+
 
 
     public static void main(String[] args) throws IOException {
