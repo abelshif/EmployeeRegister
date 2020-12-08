@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Copyright: MIT
  */
 public class TestingList {
-    Scanner s = new Scanner(new File("Lists\\SurgeryEmployees"));
+    Scanner s = new Scanner(new File("Lists\\CriticalCareEmployees"));
     List<Employee> surgeryList = new ArrayList<>();
     String data;
 
@@ -49,11 +49,14 @@ public class TestingList {
 
         for (Employee e:surgeryList
              ) {
+            if (e.getFirstName().equalsIgnoreCase("axel")){
+                e.setSalary(80000);
+            }
             e.printInfo();
         }
 
-        Employee axel = new Employee("Axel","Jeansson","Man","19940415","Surgery","0707677207",12000,"Raketforskare");
-        addEmployee(axel);
+        surgeryList.add(new Employee("Oscar","Johansson","Man","19939393","Surgery","0765420340",38888,"Fobollsproffs"));
+
         WriteToList();
     }
 
@@ -62,14 +65,12 @@ public class TestingList {
 
         for (Employee e:surgeryList
              ) {
-            e.printInfo();
+            System.out.println(e.writeInfo());
+            writer.write(e.writeInfo()+"\n");
         }
+        writer.close();
 
 
-    }
-
-    public void addEmployee(Employee axel){
-        surgeryList.add(new Employee());
     }
 
 
