@@ -14,7 +14,6 @@ import java.util.List;
 public class ManageDepartment extends JFrame implements ActionListener {
 
     DAO dao = new DAO();
-    Employee employee = new Employee();
 
     Department surgery = new Department("Surgery", dao.surgeryList.size(), "third floor - first ward ");
     Department anaesthetics = new Department("Anaesthetics", dao.anaestheticsList.size(), "third floor - second ward");

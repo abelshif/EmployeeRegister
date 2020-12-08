@@ -143,9 +143,6 @@ public class ManageEmployees  {
 
     //__________ Här leker Salah runt med koden lite! Använd den tomma constructor'n  ifall ni behöver använda klassen__________//
 
-
-
-
     public Object[][] convertListToObject(List<Employee> employeeList){
 
 
