@@ -17,10 +17,12 @@ public class Employee implements GenerateID {
     private String department;
     //private Department department?;
     private String phoneNumber;
+    private String specialization;
+    private String info;
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary){
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -28,6 +30,7 @@ public class Employee implements GenerateID {
         this.department = department;
         this.phoneNumber = phoneNumber;
         this.salary = salary;
+        this.specialization= specialization;
     }
 
     public String getFirstName() {
@@ -77,6 +80,24 @@ public class Employee implements GenerateID {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void printInfo(){
+        System.out.println("Namn: "+getFirstName()+" "+getLastName()+
+                "\nKön: "+getGender()+
+                "\nFödelsedag: "+getBirthDate()+
+                "\nAvdelning: "+getDepartment()+
+                "\nTelefonnummer: "+getPhoneNumber()+
+                "\nLön: "+getSalary()+
+                "\nÖvrigt: "+getSpecialization());
+    }
+
+    public String writeInfo(){
+        info = getFirstName()+","+getLastName()+","+getGender()+","+getBirthDate()+","+getDepartment()+","+getPhoneNumber()+","+getSalary()+","+getSpecialization();
+        return info;
+    }
 
     @Override
     public void generateID() {
