@@ -11,8 +11,8 @@ public class Nurse extends Employee implements GenerateID {
     private String certifications;
 
 
-    public Nurse(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String certifications) {
-        super(firstName, lastName, gender, birthDate, department, phoneNumber, salary);
+    public Nurse(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String role, String certifications) {
+        super(firstName, lastName, gender, birthDate, department, phoneNumber, salary, role);
         this.certifications = certifications;
     }
 

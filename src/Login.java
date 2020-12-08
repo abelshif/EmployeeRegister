@@ -2,12 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List.*;
 
 
 public class Login extends JFrame implements ActionListener {
 
     JFrame frame = new JFrame();
     JPanel loginPanel = new JPanel();
+
+    DAO dao = new DAO();
 
     JLabel welcomeLabel = new JLabel("Welcome to Employee Register System!");
     JLabel userLabel = new JLabel("Username:");
@@ -70,22 +73,22 @@ public class Login extends JFrame implements ActionListener {
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
                 loginComboBox.getSelectedItem().toString().equals("Surgery")){
             frame.dispose();
-            ManageEmployees ME = new ManageEmployees();
+            ManageEmployees ME = new ManageEmployees(dao.surgeryList);
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
                 loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
             frame.dispose();
-            ManageEmployees ME = new ManageEmployees();
+            ManageEmployees ME = new ManageEmployees(dao.anaestheticsList);
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
                 loginComboBox.getSelectedItem().toString().equals("Cardiology")){
             frame.dispose();
-            ManageEmployees ME = new ManageEmployees();
+            ManageEmployees ME = new ManageEmployees(dao.cardiologyList);
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
                 loginComboBox.getSelectedItem().toString().equals("Critical care")){
             frame.dispose();
-            ManageEmployees ME = new ManageEmployees();
+            ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
         }
         else
             JOptionPane.showMessageDialog(frame, "Felaktlig login information");
