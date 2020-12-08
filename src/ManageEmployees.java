@@ -45,29 +45,7 @@ public class ManageEmployees  {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame addFrame= new JFrame();
-                JLabel addName= new JLabel("Namn");
-                JButton buttonSave,buttonCancel;
-                addName.setSize(80,30);
-                addName.setLocation(10,40);
-
-                JTextField namnField= new JTextField(50);
-                namnField.setSize(200,30);
-                namnField.setLocation(60,50);
-                addFrame.setLayout(null);
-                addFrame.setSize(300,400);
-                //addFrame.setDefaultCloseOperation(addFrame.EXIT_ON_CLOSE);
-                addFrame.add(addName);
-                addFrame.add(namnField);
-                addFrame.setVisible(true);
-                buttonSave= new JButton("Save");
-                buttonCancel=new JButton("Cancel");
-                buttonSave.setSize(80,30);
-                buttonSave.setLocation(50,300);
-                buttonCancel.setSize(80,30);
-                buttonCancel.setLocation(170,300);
-                addFrame.add(buttonSave);
-                addFrame.add(buttonCancel);
+                JFrame addFrame= new EditWindow();
 
             }
         });
@@ -83,14 +61,15 @@ public class ManageEmployees  {
         button3= new JButton("Uppdate");
         button3.setSize(100,30);
         button3.setLocation(450,370);
-       // button3.addActionListener(new ());
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame uppdateFrame=new EditWindow();
+            }
+        });
         frame.add(button3);
 
-        /*button4=new JButton("Search");
-        button4.setSize(100,30);
-        button4.setLocation(650,370);
-       // button4.addActionListener(new ());
-        frame.add(button4);*/
+
 
 
         label1 = new JLabel("Search");
@@ -138,6 +117,102 @@ public class ManageEmployees  {
     public static void main(String[] args) {
        new ManageEmployees();
 
+    }
+
+    public class EditWindow extends JFrame {
+        public EditWindow() throws HeadlessException {
+            JLabel addName= new JLabel("Namn");
+            JLabel addSurName=new JLabel("Sur Name");
+            JLabel addGender=new JLabel("Gender");
+            JLabel addBirthDate=new JLabel("Birth date");
+            JLabel addTelNo=new JLabel("Tel.no");
+            JLabel addSalary=new JLabel("Salary");
+            JLabel addDepartment=new JLabel("Department");
+            JLabel addRole=new JLabel("Role");
+
+            JButton buttonSave,buttonCancel;
+            addName.setSize(80,30);
+            addSurName.setSize(80,30);
+            addGender.setSize(80,30);
+            addBirthDate.setSize(80,30);
+            addTelNo.setSize(80,30);
+            addSalary.setSize(80,30);
+            addDepartment.setSize(80,30);
+            addRole.setSize(80,30);
+            addName.setLocation(10,40);
+            addSurName.setLocation(10,80);
+            addGender.setLocation(10,120);
+            addBirthDate.setLocation(10,160);
+            addTelNo.setLocation(10,200);
+            addSalary.setLocation(10,240);
+            addDepartment.setLocation(10,280);
+            addRole.setLocation(10,320);
+
+            JTextField namnField= new JTextField(50);
+            JTextField surNameField= new JTextField(50);
+            JTextField genderField= new JTextField(50);
+            JTextField birthDateField= new JTextField(50);
+            JTextField telNoField= new JTextField(50);
+            JTextField salaryField= new JTextField(50);
+            JTextField departmentField= new JTextField(50);
+            JTextField roleField= new JTextField(50);
+
+
+
+
+
+            namnField.setSize(200,30);
+            surNameField.setSize(200,30);
+            genderField.setSize(200,30);
+            birthDateField.setSize(200,30);
+            telNoField.setSize(200,30);
+            salaryField.setSize(200,30);
+            departmentField.setSize(200,30);
+            roleField.setSize(200,30);
+            namnField.setLocation(80,50);
+            surNameField.setLocation(80,90);
+            genderField.setLocation(80,130);
+            birthDateField.setLocation(80,170);
+            telNoField.setLocation(80,210);
+            salaryField.setLocation(80,250);
+            departmentField.setLocation(80,290);
+            roleField.setLocation(80,330);
+            getContentPane().setBackground(new Color(136, 0, 255));
+            setLayout(null);
+            setSize(350,500);
+
+
+
+            //addFrame.setDefaultCloseOperation(addFrame.EXIT_ON_CLOSE);
+            add(addName);
+            add(addSurName);
+            add(addGender);
+            add(addBirthDate);
+            add(addTelNo);
+            add(addSalary);
+            add(addDepartment);
+            add(addRole);
+            add(namnField);
+            add(surNameField);
+            add(genderField);
+            add(birthDateField);
+            add(telNoField);
+            add(salaryField);
+            add(departmentField);
+            add(roleField);
+
+
+            setVisible(true);
+            buttonSave= new JButton("Save");
+            buttonCancel=new JButton("Cancel");
+            buttonSave.setSize(80,30);
+            buttonSave.setLocation(40,400);
+            buttonCancel.setSize(80,30);
+            buttonCancel.setLocation(200,400);
+            add(buttonSave);
+            add(buttonCancel);
+
+        }
     }
 
 

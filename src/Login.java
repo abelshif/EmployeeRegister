@@ -1,5 +1,3 @@
-package LoginSystem;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +18,7 @@ public class Login extends JFrame implements ActionListener {
     JPasswordField passwordField = new JPasswordField();
 
     JButton loginButton = new JButton("LOGIN");
-    String loginName[] = {"HR", "Dep.Employee"};
+    String loginName[] = {"HR", "Surgery", "Anaesthetics", "Cardiology", "Critical care"};
     JComboBox loginComboBox = new JComboBox(loginName);
 
 
@@ -64,20 +62,31 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (userNameText.getText().equals("abel") && passwordField.getText().equals("abel27") &&
+        if (userNameText.getText().equals("hr") && passwordField.getText().equals("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
-            //JOptionPane.showMessageDialog(frame, "korrekt");
             frame.dispose();
-            HomePage mainFrame = new HomePage();
+            ManageDepartment MD = new ManageDepartment();
         }
-        else if (userNameText.getText().equals("employee") && passwordField.getText().equals("employee27") &&
-                loginComboBox.getSelectedItem().toString().equals("Dep.Employee")){
-            //JOptionPane.showMessageDialog(frame, "korrekt");
+        else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
+                loginComboBox.getSelectedItem().toString().equals("Surgery")){
             frame.dispose();
-            HomePage mainFrame = new HomePage();
-
+            ManageEmployees ME = new ManageEmployees();
         }
-
+        else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
+                loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
+            frame.dispose();
+            ManageEmployees ME = new ManageEmployees();
+        }
+        else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
+                loginComboBox.getSelectedItem().toString().equals("Cardiology")){
+            frame.dispose();
+            ManageEmployees ME = new ManageEmployees();
+        }
+        else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
+                loginComboBox.getSelectedItem().toString().equals("Critical care")){
+            frame.dispose();
+            ManageEmployees ME = new ManageEmployees();
+        }
         else
             JOptionPane.showMessageDialog(frame, "Felaktlig login information");
 
