@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DAO {
 
-    List<Employee> surgeryList = new ArrayList<>();
+    List<Employee>  surgeryList = new ArrayList<>();
     Employee sur1 = new Employee("Salah", "Abdinoor", "Man", "950510-1932", "Surgery", "072-0452176", 78588, "Doctor");
 
     Employee sur2 = new Employee("Adam", "Nordström", "Man", "890510-8648", "Surgery", "076-7777890", 78588, "Doctor");

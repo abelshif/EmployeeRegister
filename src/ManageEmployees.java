@@ -66,6 +66,7 @@ public class ManageEmployees {
     public ManageEmployees(List<Employee> employeeList) {
 
         Object[][] convertedList = convertListTo2DObjectArray(employeeList);
+        System.out.println("Listans storlek: " + employeeList.size());
 
         frame.setLayout(null);
         frame.setSize(800, 600);
