@@ -1,6 +1,8 @@
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +22,10 @@ public class TestingList {
     String data;
     FileWriter writer;
 
+    private String cardiologyFile = "Lists\\CardiologyEmployees";
+    private String surgeryFile = "Lists\\SurgeryEmployees";
+    private String criticalCareFile = "Lists\\CriticalCareEmployees";
+
     private String firstName;
     private String lastName;
     private String gender;
@@ -29,25 +35,22 @@ public class TestingList {
     //private Department department?;
     private String phoneNumber;
     private String specialization;
-    private String userChoice;
-
+    private String[] departments = {"Kardiologi", "Kirurgi", "Akuten"};
 
     public TestingList() throws IOException {
         while (true){
-            String input = JOptionPane.showInputDialog("Vilken avdelning?" + "\n1: Kardiologi\n2: Operation\n3: Akuten");
-            if (input == null)
-                break;
-            else if (input.equalsIgnoreCase("1")) {
-                ReadFromList("Lists\\CardiologyEmployees", cardiologyList);
+            int input = JOptionPane.showOptionDialog(null, "Vilken avdelning vill kolla på?", "Sjukhus", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
+            if (input == 0) {
+                ReadFromList(cardiologyFile, cardiologyList);
             }
-            else if (input.equalsIgnoreCase("2")) {
-                ReadFromList("Lists\\SurgeryEmployees", surgeryList);
+            else if (input == 1) {
+                ReadFromList(surgeryFile, surgeryList);
             }
-            else if (input.equalsIgnoreCase("3")) {
-                ReadFromList("Lists\\CriticalCareEmployees", criticalCareList);
+            else if (input == 2) {
+                ReadFromList(criticalCareFile, criticalCareList);
             }
             else
-                System.out.println("Försök igen");
+                System.exit(0);
 
         }
     }
@@ -74,63 +77,125 @@ public class TestingList {
     }
 
     public void ReadFromList(String filePath,List<Employee> list) throws IOException, ArrayIndexOutOfBoundsException{
+        s = new Scanner(new FileReader(filePath));
+        try {
+            while (s.hasNextLine()) {
+                data = s.nextLine();
+                String[] temp = data.split(",");
+                firstName = temp[0];
+                lastName = temp[1];
+                gender = temp[2];
+                birthDate = temp[3];
+                department = temp[4];
+                phoneNumber = temp[5];
+                salary = Double.parseDouble(temp[6]);
+                specialization = temp[7];
+
+                list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization));
+            }
+            s.close();
+
+
+
+
+            System.out.println("----------------------------------------------");
+
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
         System.out.println(filePath);
-        int input = JOptionPane.showConfirmDialog(null, "Vill du lägga till ny anställd?");
+        String[] userOptions = {"Kolla avdelning", "Lägg till anställd", "Ta bort anställd", "Flytta anställd"};
+        int input = JOptionPane.showOptionDialog(null, "Vad vill du göra?", "Management system", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, userOptions, userOptions[0]);
         if (input == 0){
+            for (Employee e : list
+            ) {
+                e.printInfo();
+            }
+        }
+        else if (input == 1){
             AddNewEmployee(filePath, list);
         }
-        else {
-            s = new Scanner(new FileReader(filePath));
-            try {
-                while (s.hasNextLine()) {
-                    data = s.nextLine();
-                    System.out.println(data);
-                    String[] temp = data.split(",");
-                    firstName = temp[0];
-                    lastName = temp[1];
-                    gender = temp[2];
-                    birthDate = temp[3];
-                    department = temp[4];
-                    phoneNumber = temp[5];
-                    salary = Double.parseDouble(temp[6]);
-                    specialization = temp[7];
-
-                    list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization));
-                }
-                s.close();
-
-                for (Employee e : list
-                ) {
-                    e.printInfo();
-                }
-
-
-                System.out.println("----------------------------------------------");
-
-
-                //WriteToList(list, filePath);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
-            }
+        else if (input == 2){
+            RemoveEmployee(filePath, list);
+        }
+        else if (input == 3){
+            RemoveEmployee(filePath, list);
         }
 
     }
 
-    public void WriteToList(List<Employee> list, String s) throws IOException {
-         writer = new FileWriter(s, false);
+    public void RemoveEmployee(String filePath, List<Employee> list) throws IOException {
+        System.out.println("test");
+        File tempFile = new File("Lists\\tempEmployeeList");
+        File newFile = new File(filePath);
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        BufferedWriter writer2 = new BufferedWriter(new FileWriter(tempFile));
+        String name = JOptionPane.showInputDialog("Vad heter den anställda du vill ta bort eller flytta?");
+        String employeeInfo = "";
 
-        for (Employee e:list
-             ) {
-            if (e.getFirstName().equalsIgnoreCase("axel")){
-                e.setSalary(80000);
+
+
+            for (Employee e:list
+            ) {
+                System.out.println(e.writeInfo());
+                if (e.getFirstName().equalsIgnoreCase(name)) {
+                    System.out.println("Test hittades!");
+                    employeeInfo = e.writeInfo();
+                }
             }
-            System.out.println(e.writeInfo());
-            writer.write(e.writeInfo()+"\n");
+
+                    String currentLine;
+
+        try {
+
+            while ((currentLine = reader.readLine()) != null){
+                System.out.println(employeeInfo);
+                if (!currentLine.trim().equals(employeeInfo)){
+                    writer2.write(currentLine+"\n");
+                    writer2.flush();
+                }
+                else if (currentLine.trim().equals(employeeInfo)){
+                    System.out.println(currentLine + "... togs bort");
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        System.out.println("----------------------------------------------");
+        writer2.close();
+        reader.close();
+
+        newFile.delete();
+        tempFile.renameTo(new File(filePath));
+
+        int choice = JOptionPane.showConfirmDialog(null, "Vill du flytta den anställda till en annan avdelning?");
+        if (choice == 0) {
+            choice = JOptionPane.showOptionDialog(null, "Till vilken avdelning?", null, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
+            if (choice == 0){
+                SwapDepartment(employeeInfo, cardiologyFile);
+            }
+            else if (choice == 1){
+                SwapDepartment(employeeInfo, surgeryFile);
+            }
+            else if (choice == 2){
+                SwapDepartment(employeeInfo, criticalCareFile);
+            }
+        }
+
+
+    }
+
+    private void SwapDepartment(String employeeInfo, String filePath) throws IOException {
+        writer = new FileWriter(filePath, true);
+
+        try {
+            writer.write("\n"+employeeInfo);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
         writer.close();
     }
-
 
 
     public static void main(String[] args) throws IOException {
