@@ -95,7 +95,9 @@ public class Login extends JFrame implements ActionListener {
         else
             JOptionPane.showMessageDialog(frame, "Felaktlig login information");
 
+        dispose();
     }
+
 
     public static void main(String[] args) {
         new Login();

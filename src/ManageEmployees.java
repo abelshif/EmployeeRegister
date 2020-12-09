@@ -13,7 +13,7 @@ public class ManageEmployees {
     private final JFrame frame = new JFrame("Employee Register");
     private JLabel label1;
     private JTextField textField;
-    private JButton button1, button2, button3;
+    private JButton button1, button2, button3, printEmployeeCard;
     private JTable table;
     private final String[] columnNames = {"Name", "Sur Name", "Gender", "Birth date", "Tel.no", "Salary", "Department", "Role"};
     private JScrollPane scrollPane;
@@ -118,6 +118,23 @@ public class ManageEmployees {
                 JFrame uppdateFrame = new EditWindow();
             }
         });
+
+        printEmployeeCard = new JButton("Print Card");
+        printEmployeeCard.setSize(100, 30);
+        printEmployeeCard.setLocation(650, 370);
+        printEmployeeCard.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JOptionPane.showMessageDialog(null,
+                        employeeList.get(0).generateID());
+
+            }
+        });
+
+        frame.add(printEmployeeCard);
+
         frame.add(button3);
         label1 = new JLabel("Search");
         label1.setSize(200, 30);

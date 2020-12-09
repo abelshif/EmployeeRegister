@@ -1,5 +1,3 @@
-import javax.print.Doc;
-
 /**
  * Created by Axel Jeansson
  * Date: 2020-11-30
@@ -42,8 +40,10 @@ public class Doctor extends Employee implements GenerateID{
     }
 
     @Override
-    public void generateID() {
+    public String generateID() {
 
+
+        return null;
     }
 
 }

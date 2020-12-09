@@ -1,5 +1,4 @@
-import javax.swing.*;
-import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by Axel Jeansson
@@ -91,7 +90,11 @@ public class Employee implements GenerateID {
 
 
     @Override
-    public void generateID() {
+    public String generateID() {
+
+        Random rand = new Random();
+        int random = 100 + rand.nextInt(899);
+        return getFirstName() + "_" + random;
 
     }
 }

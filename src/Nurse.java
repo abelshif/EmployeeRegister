@@ -1,5 +1,3 @@
-import java.awt.*;
-
 /**
  * Created by Axel Jeansson
  * Date: 2020-11-30
@@ -26,8 +24,9 @@ public class Nurse extends Employee implements GenerateID {
     }
 
     @Override
-    public void generateID() {
+    public String generateID() {
 
+        return null;
     }
 
 }
