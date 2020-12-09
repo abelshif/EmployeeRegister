@@ -37,6 +37,7 @@ public class ManageEmployees {
 
         int counter = listToConvertFrom.size();
 
+
         // For each Employee in list, create new 2D-Object[][]
         for (Employee employee : listToConvertFrom) {
 
@@ -301,8 +302,6 @@ public class ManageEmployees {
                         saveButton(namnField.getText(),surNameField.getText(),genderField.getText(),
                                 birthDateField.getText(), telNoField.getText(),
                                 salaryField.getText(), departmentField.getText(), roleField.getText());
-
-                        System.out.println("New Employee Added to: " + departmentField.getText() + " - Not appending to textfile");
 
 
                     }
