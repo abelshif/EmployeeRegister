@@ -338,11 +338,11 @@ public class ManageEmployees {
         /**
          * This method updates the Employee window.
          *
-         * @param employee
+         * @param addedEmployee
          * @param dao
          * @param department
          */
-        public void updateEmployeeWindow(Employee employee, DAO dao, String department){
+        public void updateEmployeeWindow(Employee addedEmployee, DAO dao, String department){
 
             final String cardiology = "Cardiology";
             final String anaesthetics = "Anaesthetics";
@@ -352,19 +352,19 @@ public class ManageEmployees {
             // Depending on the chosen department for the employee, he/she will be added to said department list.
             switch (department) {
                 case cardiology -> {
-                    dao.cardiologyList.add(employee);
+                    dao.cardiologyList.add(addedEmployee);
                     new ManageEmployees(dao.cardiologyList);
                 }
                 case anaesthetics -> {
-                    dao.anaestheticsList.add(employee);
+                    dao.anaestheticsList.add(addedEmployee);
                     new ManageEmployees(dao.anaestheticsList);
                 }
                 case surgery -> {
-                    dao.surgeryList.add(employee);
+                    dao.surgeryList.add(addedEmployee);
                     new ManageEmployees(dao.surgeryList);
                 }
                 case criticalCare -> {
-                    dao.criticalCareList.add(employee);
+                    dao.criticalCareList.add(addedEmployee);
                     new ManageEmployees(dao.criticalCareList);
                 }
             }
