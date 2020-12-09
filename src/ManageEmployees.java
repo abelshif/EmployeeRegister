@@ -349,7 +349,7 @@ public class ManageEmployees {
             final String surgery = "Surgery";
             final String criticalCare = "Critical care";
 
-            // Depending on the chosen department for the employee, he/she will be added to said list.
+            // Depending on the chosen department for the employee, he/she will be added to said department list.
             switch (department) {
                 case cardiology -> {
                     dao.cardiologyList.add(employee);
