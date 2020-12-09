@@ -52,6 +52,8 @@ public class Login extends JFrame implements ActionListener {
         loginPanel.add(loginComboBox);
         loginPanel.add(loginButton);
 
+
+
         add(loginPanel);
         setTitle("Login page");
         setPreferredSize(new Dimension(450, 450));

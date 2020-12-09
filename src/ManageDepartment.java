@@ -77,6 +77,8 @@ public class ManageDepartment extends JFrame implements ActionListener {
             case criticalCareCase -> {return dao.criticalCareList; }
         }
 
+
+
         return null;
 
     }

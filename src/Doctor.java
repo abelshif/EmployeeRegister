@@ -12,6 +12,8 @@ public class Doctor extends Employee implements GenerateID{
     private String specializtion;
     private boolean underTraining;
 
+
+
     public Doctor(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String role, String degree, String specializtion, boolean underTraining) {
         super(firstName, lastName, gender, birthDate, department, phoneNumber, salary, role);
         this.degree = degree;

@@ -16,6 +16,7 @@ public class Nurse extends Employee implements GenerateID {
         this.certifications = certifications;
     }
 
+
     public String getCertifications() {
         return certifications;
     }

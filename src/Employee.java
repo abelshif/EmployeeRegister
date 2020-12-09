@@ -19,6 +19,8 @@ public class Employee implements GenerateID {
     private String role;
 
 
+
+
     public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String role){
         this.firstName = firstName;
         this.lastName = lastName;
