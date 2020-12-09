@@ -7,8 +7,8 @@ import java.util.List.*;
 
 public class Login extends JFrame implements ActionListener {
 
-    JFrame frame = new JFrame();
     JPanel loginPanel = new JPanel();
+
 
     DAO dao = new DAO();
 
@@ -26,21 +26,21 @@ public class Login extends JFrame implements ActionListener {
 
 
     public Login() {
-
+        setLayout(null);
         loginPanel.setLayout(null);
         loginPanel.setVisible(true);
-        loginPanel.setBackground(Color.CYAN);
+        //loginPanel.setBackground(Color.cyan);
 
-        welcomeLabel.setBounds(50, 75, 250, 30);
-        userLabel.setBounds(50, 150, 100, 30);
-        passwordLabel.setBounds(50, 200, 100, 30);
-        loginLabel.setBounds(50, 250, 100, 30);
+        welcomeLabel.setBounds(100, 25, 250, 30);
+        userLabel.setBounds(100, 90, 100, 30);
+        passwordLabel.setBounds(100, 140, 100, 30);
+        loginLabel.setBounds(100, 190, 100, 30);
 
-        userNameText.setBounds(150, 150, 150, 30);
-        passwordField.setBounds(150, 200, 150, 30);
-        loginComboBox.setBounds(150, 250, 150, 30);
+        userNameText.setBounds(170, 90, 150, 30);
+        passwordField.setBounds(170, 140, 150, 30);
+        loginComboBox.setBounds(170, 190, 150, 30);
 
-        loginButton.setBounds(150, 300, 150, 30);
+        loginButton.setBounds(170, 250, 150, 30);
         loginButton.addActionListener(this);
 
         loginPanel.add(welcomeLabel);
@@ -52,11 +52,11 @@ public class Login extends JFrame implements ActionListener {
         loginPanel.add(loginComboBox);
         loginPanel.add(loginButton);
 
-
-
+        loginPanel.setBorder(BorderFactory.createEtchedBorder());
+        loginPanel.setBounds(10,10, 415, 345);
         add(loginPanel);
         setTitle("Login page");
-        setPreferredSize(new Dimension(450, 450));
+        setPreferredSize(new Dimension(450, 400));
         setBackground(Color.BLUE);
         setVisible(true);
         pack();
@@ -69,33 +69,34 @@ public class Login extends JFrame implements ActionListener {
 
         if (userNameText.getText().equals("hr") && passwordField.getText().equals("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
-            frame.dispose();
+            dispose();
             ManageDepartment MD = new ManageDepartment();
         }
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
                 loginComboBox.getSelectedItem().toString().equals("Surgery")){
-            frame.dispose();
+           dispose();
             ManageEmployees ME = new ManageEmployees(dao.surgeryList);
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
                 loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
-            frame.dispose();
+          dispose();
             ManageEmployees ME = new ManageEmployees(dao.anaestheticsList);
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
                 loginComboBox.getSelectedItem().toString().equals("Cardiology")){
-            frame.dispose();
+          dispose();
             ManageEmployees ME = new ManageEmployees(dao.cardiologyList);
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
                 loginComboBox.getSelectedItem().toString().equals("Critical care")){
-            frame.dispose();
+            dispose();
             ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
         }
         else
-            JOptionPane.showMessageDialog(frame, "Felaktlig login information");
+            JOptionPane.showMessageDialog(this, "Felaktlig login information");
 
     }
+
 
     public static void main(String[] args) {
         new Login();
