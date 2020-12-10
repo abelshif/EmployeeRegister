@@ -21,7 +21,7 @@ public class Login extends JFrame implements ActionListener {
     JPasswordField passwordField = new JPasswordField();
 
     JButton loginButton = new JButton("LOGIN");
-    String loginName[] = {"HR", "Avdeling Chefer"};
+    String loginName[] = {"HR", "Head Of Department"};
     JComboBox loginComboBox = new JComboBox(loginName);
 
 
@@ -67,28 +67,28 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (userNameText.getText().equalsIgnoreCase("hr") && passwordField.getText().equals("hr") &&
+        if (userNameText.getText().equalsIgnoreCase("hr") && passwordField.getText().equalsIgnoreCase("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
             dispose();
             ManageDepartment MD = new ManageDepartment();
         }
-        else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
+        else if (userNameText.getText().equalsIgnoreCase("surgery") && passwordField.getText().equalsIgnoreCase("surgery") &&
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
             ManageEmployees ME = new ManageEmployees(dao.surgeryList);
         }
-        else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
+        else if (userNameText.getText().equalsIgnoreCase("anaesthetics") && passwordField.getText().equalsIgnoreCase("anaesthetics") &&
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
             ManageEmployees ME = new ManageEmployees(dao.anaestheticsList);
         }
-        else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
+        else if (userNameText.getText().equalsIgnoreCase("cardiology") && passwordField.getText().equalsIgnoreCase("cardiology") &&
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
             ManageEmployees ME = new ManageEmployees(dao.cardiologyList);
         }
-        else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
+        else if (userNameText.getText().equalsIgnoreCase("criticalcare") && passwordField.getText().equalsIgnoreCase("criticalcare") &&
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
             ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
         }
