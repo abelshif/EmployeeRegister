@@ -14,7 +14,7 @@ public class ManageEmployees {
     private final JFrame frame = new JFrame("Employee Register");
     private JLabel label1;
     private JTextField textField;
-    private JButton addEmployeeButton, RemoveEmployeeButton, UpdateButton;
+    private JButton addEmployeeButton, RemoveEmployeeButton, UpdateButton, backToMenu;
     private JTable table;
     private final String[] columnNames = {"Firstname", "Surname", "Gender", "Birth date", "Tel.no", "Salary", "Department", "Role"};
     private JScrollPane scrollPane;
@@ -117,6 +117,7 @@ public class ManageEmployees {
 
         });
         frame.add(RemoveEmployeeButton);
+
         UpdateButton = new JButton("Update");
         UpdateButton.setSize(100, 30);
         UpdateButton.setLocation(450, 370);
@@ -124,6 +125,19 @@ public class ManageEmployees {
             JFrame updateFrame = new EditWindow();
         });
         frame.add(UpdateButton);
+
+        backToMenu = new JButton("Tillbaka");
+        backToMenu.setBounds(650, 370, 100 ,30);
+        backToMenu.addActionListener(e -> {
+            try {
+                new ManageDepartment();
+                frame.dispose();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        });
+        frame.add(backToMenu);
+
         label1 = new JLabel("Search");
         label1.setSize(200, 30);
         label1.setLocation(550, 8);
@@ -391,7 +405,7 @@ public class ManageEmployees {
             writer = new FileWriter(filePath, true);
 
             try {
-                writer.write("\n" + EmployeeInfo);
+                writer.write(EmployeeInfo+"\n");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -444,6 +458,25 @@ public class ManageEmployees {
         newFile.delete();
         tempFile.renameTo(new File(filePath));
 
+        int userChoice = JOptionPane.showConfirmDialog(null,"Vill du flytta personen till en annan avdelning?");
+            if (userChoice == 0){
+                userChoice = JOptionPane.showOptionDialog(null, "Till vilken avdelning?", "Flytta anställd", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
+                if (userChoice == 0){
+                    SwapDepartment(employeeInfo, cardiologyFile);
+                }
+                else if (userChoice == 1){
+                    SwapDepartment(employeeInfo, surgeryFile);
+                }
+                else if (userChoice == 2){
+                    SwapDepartment(employeeInfo, criticalCareFile );
+                }
+                else if(userChoice == 3){
+                    SwapDepartment(employeeInfo, anaestheticsFile);
+                }
+                else
+                    System.out.println("Anställd borttagen");
+            }
+
         DAO dao = new DAO();
 
         switch (department) {
@@ -470,39 +503,15 @@ public class ManageEmployees {
 
     }
 
-    private void RemoveEmployeeFromTextFile(String filePath, List<Employee> list, String department) throws IOException {
-        writer = new FileWriter(filePath, false);
+    private void SwapDepartment(String employeeInfo, String filePath) throws IOException {
+        writer = new FileWriter(filePath, true);
 
-        for (Employee e:list
-             ) {
-            try {
-                writer.write(e.writeInfo()+"\n");
-            }catch (IOException exception){e.printInfo();}
+        try {
+            writer.write("\n"+employeeInfo);
+        }catch (IOException e){
+            e.printStackTrace();
         }
         writer.close();
-
-        DAO dao = new DAO();
-
-        switch (department) {
-            case cardiology -> {
-                new ManageEmployees(dao.cardiologyList,cardiologyFile, department);
-            }
-            case anaesthetics -> {
-                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department);
-            }
-            case surgery -> {
-                new ManageEmployees(dao.surgeryList,surgeryFile, department);
-            }
-            case criticalCare -> {
-                new ManageEmployees(dao.criticalCareList,criticalCareFile, department);
-            }
-        }
-
-        frame.dispose();
-        frame.revalidate();
-        frame.repaint();
-
-
     }
 
 
