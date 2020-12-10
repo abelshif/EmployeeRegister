@@ -21,7 +21,7 @@ public class Login extends JFrame implements ActionListener {
     JPasswordField passwordField = new JPasswordField();
 
     JButton loginButton = new JButton("LOGIN");
-    String loginName[] = {"HR", "Surgery", "Anaesthetics", "Cardiology", "Critical care"};
+    String loginName[] = {"HR", "Avdeling Chefer"};
     JComboBox loginComboBox = new JComboBox(loginName);
 
 
@@ -73,22 +73,22 @@ public class Login extends JFrame implements ActionListener {
             ManageDepartment MD = new ManageDepartment();
         }
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
-                loginComboBox.getSelectedItem().toString().equals("Surgery")){
+                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
             dispose();
             ManageEmployees ME = new ManageEmployees(dao.surgeryList);
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
-                loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
+                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
             dispose();
             ManageEmployees ME = new ManageEmployees(dao.anaestheticsList);
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
-                loginComboBox.getSelectedItem().toString().equals("Cardiology")){
+                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
             dispose();
             ManageEmployees ME = new ManageEmployees(dao.cardiologyList);
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
-                loginComboBox.getSelectedItem().toString().equals("Critical care")){
+                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
             dispose();
             ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
         }
