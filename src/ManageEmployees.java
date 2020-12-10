@@ -76,7 +76,7 @@ public class ManageEmployees {
         return null;
     }
 
-    public ManageEmployees(List<Employee> employeeList, String filePath) {
+    public ManageEmployees(List<Employee> employeeList, String filePath, String department) {
 
         Object[][] convertedList = convertListTo2DObjectArray(employeeList);
         System.out.println("Listans storlek: " + employeeList.size());
@@ -110,8 +110,7 @@ public class ManageEmployees {
         RemoveEmployeeButton.setLocation(250, 370);
         RemoveEmployeeButton.addActionListener(e -> {
             try {
-                DAO dao = new DAO();
-                RemoveEmployee(employeeList, dao, filePath);
+                RemoveEmployee(employeeList,filePath,department);
             } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
@@ -360,25 +359,25 @@ public class ManageEmployees {
                     dao.cardiologyList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(cardiologyFile, info);
-                    new ManageEmployees(dao.cardiologyList,cardiologyFile);
+                    new ManageEmployees(dao.cardiologyList,cardiologyFile, department);
                 }
                 case anaesthetics -> {
                     dao.anaestheticsList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(anaestheticsFile, info);
-                    new ManageEmployees(dao.anaestheticsList,anaestheticsFile);
+                    new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department);
                 }
                 case surgery -> {
                     dao.surgeryList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(surgeryFile, info);
-                    new ManageEmployees(dao.surgeryList,surgeryFile);
+                    new ManageEmployees(dao.surgeryList,surgeryFile, department);
                 }
                 case criticalCare -> {
                     dao.criticalCareList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(criticalCareFile, info);
-                    new ManageEmployees(dao.criticalCareList,criticalCareFile);
+                    new ManageEmployees(dao.criticalCareList,criticalCareFile, department);
                 }
             }
 
@@ -403,38 +402,24 @@ public class ManageEmployees {
 
 
     }
-    public void RemoveEmployee(List<Employee> list, DAO dao, String filePath) throws IOException {
-        String info = "";
+    public void RemoveEmployee(List<Employee> list, String filePath, String department) throws IOException {
         // Depending on the chosen department for the employee, he/she will be removed from said department list.
-        String input = JOptionPane.showInputDialog("Vem vill du ta bort från avdelningen?");
-
-        for (Employee e :list
-             ) {
-            if (e.getFirstName().equalsIgnoreCase(input)){
-                info = e.writeInfo();
-                dao.surgeryList.remove(e);
-            }
-        }
-
-        RemoveEmployeeFromTextFile(filePath, info, dao);
-
-        frame.dispose();
-        frame.revalidate();
-        frame.repaint();
-
-        for (Employee e:dao.surgeryList
-             ) {
-            e.writeInfo();
-        }
-        new ManageEmployees(dao.surgeryList,"Lists\\CardiologyEmployees");
-
-    }
-
-    private void RemoveEmployeeFromTextFile(String filePath, String employeeInfo, DAO dao) throws IOException {
         File tempFile = new File("Lists\\tempEmployeeList");
         File newFile = new File(filePath);
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         BufferedWriter writer2 = new BufferedWriter(new FileWriter(tempFile));
+        String name = JOptionPane.showInputDialog("Vad heter den anställda du vill ta bort eller flytta?");
+        String employeeInfo = "";
+
+        for (Employee e:list
+        ) {
+            System.out.println(e.writeInfo());
+            if (e.getFirstName().equalsIgnoreCase(name)) {
+                System.out.println("Test hittades!");
+                employeeInfo = e.writeInfo();
+            }
+        }
+
         String currentLine;
 
         try {
@@ -458,6 +443,64 @@ public class ManageEmployees {
 
         newFile.delete();
         tempFile.renameTo(new File(filePath));
+
+        DAO dao = new DAO();
+
+        switch (department) {
+            case cardiology -> {
+                new ManageEmployees(dao.cardiologyList,cardiologyFile, department);
+            }
+            case anaesthetics -> {
+                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department);
+            }
+            case surgery -> {
+                new ManageEmployees(dao.surgeryList,surgeryFile, department);
+            }
+            case criticalCare -> {
+                new ManageEmployees(dao.criticalCareList,criticalCareFile, department);
+            }
+        }
+
+        frame.dispose();
+        frame.revalidate();
+        frame.repaint();
+
+
+
+
+    }
+
+    private void RemoveEmployeeFromTextFile(String filePath, List<Employee> list, String department) throws IOException {
+        writer = new FileWriter(filePath, false);
+
+        for (Employee e:list
+             ) {
+            try {
+                writer.write(e.writeInfo()+"\n");
+            }catch (IOException exception){e.printInfo();}
+        }
+        writer.close();
+
+        DAO dao = new DAO();
+
+        switch (department) {
+            case cardiology -> {
+                new ManageEmployees(dao.cardiologyList,cardiologyFile, department);
+            }
+            case anaesthetics -> {
+                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department);
+            }
+            case surgery -> {
+                new ManageEmployees(dao.surgeryList,surgeryFile, department);
+            }
+            case criticalCare -> {
+                new ManageEmployees(dao.criticalCareList,criticalCareFile, department);
+            }
+        }
+
+        frame.dispose();
+        frame.revalidate();
+        frame.repaint();
 
 
     }

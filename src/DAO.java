@@ -34,13 +34,13 @@ public class DAO {
     private String anaestheticsFile = "Lists\\AnaestheticsEmployees";
 
 
-    List<Employee>  surgeryList = new ArrayList<>();
+    public List<Employee>  surgeryList = new ArrayList<>();
 
-    List<Employee> anaestheticsList = new ArrayList<>();
+    public List<Employee> anaestheticsList = new ArrayList<>();
 
-    List<Employee> cardiologyList = new ArrayList<>();
+    public List<Employee> cardiologyList = new ArrayList<>();
 
-    List<Employee> criticalCareList = new ArrayList<>();
+    public List<Employee> criticalCareList = new ArrayList<>();
 
 
     public DAO() throws FileNotFoundException {

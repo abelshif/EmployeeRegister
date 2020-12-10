@@ -80,22 +80,22 @@ public class Login extends JFrame implements ActionListener {
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
                 loginComboBox.getSelectedItem().toString().equals("Surgery")){
            dispose();
-            ManageEmployees ME = new ManageEmployees(dao.surgeryList, "Lists\\SurgeryEmployees");
+           new ManageEmployees(dao.surgeryList, "Lists\\SurgeryEmployees","Surgery");
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
                 loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
           dispose();
-            ManageEmployees ME = new ManageEmployees(dao.anaestheticsList, "Lists\\AnaestheticsEmployees");
+            new ManageEmployees(dao.anaestheticsList, "Lists\\AnaestheticsEmployees", "Anaesthetics");
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
                 loginComboBox.getSelectedItem().toString().equals("Cardiology")){
           dispose();
-            ManageEmployees ME = new ManageEmployees(dao.cardiologyList, "Lists\\CardiologyEmployees");
+            new ManageEmployees(dao.cardiologyList, "Lists\\CardiologyEmployees", "Cardiology");
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
                 loginComboBox.getSelectedItem().toString().equals("Critical care")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.criticalCareList, "Lists\\CriticalCareEmployees");
+            new ManageEmployees(dao.criticalCareList, "Lists\\CriticalCareEmployees", "Critical care");
         }
         else
             JOptionPane.showMessageDialog(this, "Felaktlig login information");
