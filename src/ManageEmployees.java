@@ -15,7 +15,7 @@ public class ManageEmployees {
     private final JFrame frame = new JFrame("Employee Register");
     private JLabel label1;
     private JTextField textField;
-    private JButton addEmployeeButton, RemoveEmployeeButton, UpdateButton, backToMenu;
+    private JButton addEmployeeButton, RemoveEmployeeButton, UpdateButton, backToMenu, printEmployeeCard;
     private JTable table;
     private final String[] columnNames = {"Firstname", "Surname", "Gender", "Birth date", "Tel.no", "Salary", "Department", "Role"};
     private JScrollPane scrollPane;
@@ -141,6 +141,23 @@ public class ManageEmployees {
         });
         frame.add(backToMenu);
 
+
+        printEmployeeCard = new JButton("Print Card");
+        printEmployeeCard.setSize(100, 30);
+        printEmployeeCard.setLocation(650, 370);
+        printEmployeeCard.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JOptionPane.showMessageDialog(null,
+                        employeeList.get(0).generateID());
+
+            }
+        });
+
+        frame.add(printEmployeeCard);
+
         label1 = new JLabel("Search");
         label1.setSize(200, 30);
         label1.setLocation(550, 8);
@@ -173,8 +190,6 @@ public class ManageEmployees {
 
     }
 
-
-
     public void repaint(){
 
         frame.repaint();
@@ -197,7 +212,6 @@ public class ManageEmployees {
         if (textToSearch.isEmpty()) { return employeeInfo; }
 
         // When searching
-
         String nameToCompare;
 
         for (Employee employee : employeeList) {
@@ -257,7 +271,12 @@ public class ManageEmployees {
             JTextField birthDateField = new JTextField(50);
             JTextField telNoField = new JTextField(50);
             JTextField salaryField = new JTextField(50);
-            JTextField departmentField = new JTextField(50);
+            JComboBox<String>departmentField= new JComboBox<>();
+            departmentField.addItem("Surgery");
+            departmentField.addItem("Anaesthetics");
+            departmentField.addItem("Cardiology");
+            departmentField.addItem("Critical Care");
+            //JTextField departmentField = new JTextField(50);
             //JTextField roleField = new JTextField(50);
             JComboBox<String> roleField= new JComboBox<>();
             roleField.addItem("Doctor");
@@ -314,10 +333,10 @@ public class ManageEmployees {
 
             // Fixme: Ser inte bra ut såhär, Gör rent i klassen generellt
             buttonSave.addActionListener(e -> {
-                if (e.getSource() == buttonSave){
+                if (e.getSource() == buttonSave) {
 
                     try {
-                        saveButton(namnField.getText(),surNameField.getText(),genderField.getSelectedItem().toString(),
+                        saveButton(namnField.getText(), surNameField.getText(), genderField.getSelectedItem().toString(),
                                 birthDateField.getText(), telNoField.getText(),
                                 salaryField.getText(), departmentField.getText(), roleField.getSelectedItem().toString());
                     } catch (IOException fileNotFoundException) {
