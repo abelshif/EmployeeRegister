@@ -2,12 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List.*;
 
 
 public class Login extends JFrame implements ActionListener {
 
-    JFrame frame = new JFrame();
     JPanel loginPanel = new JPanel();
+
 
     DAO dao = new DAO();
 
@@ -25,21 +26,21 @@ public class Login extends JFrame implements ActionListener {
 
 
     public Login() {
-
+        setLayout(null);
         loginPanel.setLayout(null);
         loginPanel.setVisible(true);
-        loginPanel.setBackground(Color.CYAN);
+        //loginPanel.setBackground(Color.cyan);
 
-        welcomeLabel.setBounds(50, 75, 250, 30);
-        userLabel.setBounds(50, 150, 100, 30);
-        passwordLabel.setBounds(50, 200, 100, 30);
-        loginLabel.setBounds(50, 250, 100, 30);
+        welcomeLabel.setBounds(100, 25, 250, 30);
+        userLabel.setBounds(100, 90, 100, 30);
+        passwordLabel.setBounds(100, 140, 100, 30);
+        loginLabel.setBounds(100, 190, 100, 30);
 
-        userNameText.setBounds(150, 150, 150, 30);
-        passwordField.setBounds(150, 200, 150, 30);
-        loginComboBox.setBounds(150, 250, 150, 30);
+        userNameText.setBounds(170, 90, 150, 30);
+        passwordField.setBounds(170, 140, 150, 30);
+        loginComboBox.setBounds(170, 190, 150, 30);
 
-        loginButton.setBounds(150, 300, 150, 30);
+        loginButton.setBounds(170, 250, 150, 30);
         loginButton.addActionListener(this);
 
         loginPanel.add(welcomeLabel);
@@ -51,6 +52,8 @@ public class Login extends JFrame implements ActionListener {
         loginPanel.add(loginComboBox);
         loginPanel.add(loginButton);
 
+        loginPanel.setBorder(BorderFactory.createEtchedBorder());
+        loginPanel.setBounds(10,10, 415, 345);
         add(loginPanel);
         setTitle("Login page");
         setPreferredSize(new Dimension(450, 450));
@@ -90,11 +93,9 @@ public class Login extends JFrame implements ActionListener {
             ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
         }
         else
-            JOptionPane.showMessageDialog(frame, "Felaktlig login information");
+            JOptionPane.showMessageDialog(this, "Felaktlig login information");
 
-        dispose();
     }
-
 
     public static void main(String[] args) {
         new Login();

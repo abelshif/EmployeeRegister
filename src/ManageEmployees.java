@@ -252,12 +252,17 @@ public class ManageEmployees {
 
             JTextField namnField = new JTextField(50);
             JTextField surNameField = new JTextField(50);
-            JTextField genderField = new JTextField(50);
+            JComboBox<String> genderField = new JComboBox<>();
+            genderField.addItem("Male");
+            genderField.addItem("Female");
             JTextField birthDateField = new JTextField(50);
             JTextField telNoField = new JTextField(50);
             JTextField salaryField = new JTextField(50);
             JTextField departmentField = new JTextField(50);
-            JTextField roleField = new JTextField(50);
+            //JTextField roleField = new JTextField(50);
+            JComboBox<String> roleField= new JComboBox<>();
+            roleField.addItem("Doctor");
+            roleField.addItem("Nurse");
 
             namnField.setSize(200, 30);
             surNameField.setSize(200, 30);
@@ -275,7 +280,7 @@ public class ManageEmployees {
             salaryField.setLocation(80, 250);
             departmentField.setLocation(80, 290);
             roleField.setLocation(80, 330);
-            getContentPane().setBackground(new Color(136, 0, 255));
+            //getContentPane().setBackground(new Color(136, 0, 255));
             setLayout(null);
             setSize(350, 500);
 
@@ -319,9 +324,9 @@ public class ManageEmployees {
                 public void actionPerformed(ActionEvent e) {
                     if (e.getSource() == buttonSave){
 
-                        saveButton(namnField.getText(),surNameField.getText(),genderField.getText(),
+                        saveButton(namnField.getText(),surNameField.getText(),genderField.getSelectedItem().toString(),
                                 birthDateField.getText(), telNoField.getText(),
-                                salaryField.getText(), departmentField.getText(), roleField.getText());
+                                salaryField.getText(), departmentField.getText(), roleField.getSelectedItem().toString());
 
 
                     }
