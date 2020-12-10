@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +14,22 @@ public class ManageEmployees {
     private final JFrame frame = new JFrame("Employee Register");
     private JLabel label1;
     private JTextField textField;
-    private JButton button1, button2, button3;
+    private JButton addEmployeeButton, RemoveEmployeeButton, UpdateButton;
     private JTable table;
-    private final String[] columnNames = {"Name", "Sur Name", "Gender", "Birth date", "Tel.no", "Salary", "Department", "Role"};
+    private final String[] columnNames = {"Firstname", "Surname", "Gender", "Birth date", "Tel.no", "Salary", "Department", "Role"};
     private JScrollPane scrollPane;
     private DefaultTableModel tabelmodel;
+    private String[] departments = {"Kardiologi", "Kirurgi", "Akuten", "Anestesi"};
+    private String cardiologyFile = "Lists\\CardiologyEmployees";
+    private String surgeryFile = "Lists\\SurgeryEmployees";
+    private String criticalCareFile = "Lists\\CriticalCareEmployees";
+    private String anaestheticsFile = "Lists\\AnaestheticsEmployees";
+    FileWriter writer;
 
+    final String cardiology = "Cardiology";
+    final String anaesthetics = "Anaesthetics";
+    final String surgery = "Surgery";
+    final String criticalCare = "Critical care";
 
 
 
@@ -65,10 +76,11 @@ public class ManageEmployees {
         return null;
     }
 
-    public ManageEmployees(List<Employee> employeeList) {
+    public ManageEmployees(List<Employee> employeeList, String filePath) {
 
         Object[][] convertedList = convertListTo2DObjectArray(employeeList);
         System.out.println("Listans storlek: " + employeeList.size());
+        System.out.println(filePath);
 
         frame.setLayout(null);
         frame.setSize(800, 600);
@@ -83,42 +95,36 @@ public class ManageEmployees {
         scrollPane.setLocation(50, 50);
         frame.add(scrollPane);
 
-        button1 = new JButton("Add");
-        button1.setSize(100, 30);
-        button1.setLocation(50, 370);
-        button1.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame addFrame = new EditWindow();
-
-
-            }
+        addEmployeeButton = new JButton("Add");
+        addEmployeeButton.setSize(100, 30);
+        addEmployeeButton.setLocation(50, 370);
+        addEmployeeButton.addActionListener(e -> {
+            JFrame addFrame = new EditWindow();
         });
 
 
-        frame.add(button1);
+        frame.add(addEmployeeButton);
 
-        button2 = new JButton("Delete");
-        button2.setSize(100, 30);
-        button2.setLocation(250, 370);
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        RemoveEmployeeButton = new JButton("Delete");
+        RemoveEmployeeButton.setSize(100, 30);
+        RemoveEmployeeButton.setLocation(250, 370);
+        RemoveEmployeeButton.addActionListener(e -> {
+            try {
+                DAO dao = new DAO();
+                RemoveEmployee(employeeList, dao, filePath);
+            } catch (IOException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
 
-            }
         });
-        frame.add(button2);
-        button3 = new JButton("Update");
-        button3.setSize(100, 30);
-        button3.setLocation(450, 370);
-        button3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame uppdateFrame = new EditWindow();
-            }
+        frame.add(RemoveEmployeeButton);
+        UpdateButton = new JButton("Update");
+        UpdateButton.setSize(100, 30);
+        UpdateButton.setLocation(450, 370);
+        UpdateButton.addActionListener(e -> {
+            JFrame updateFrame = new EditWindow();
         });
-        frame.add(button3);
+        frame.add(UpdateButton);
         label1 = new JLabel("Search");
         label1.setSize(200, 30);
         label1.setLocation(550, 8);
@@ -150,6 +156,8 @@ public class ManageEmployees {
         repaint();
 
     }
+
+
 
     public void repaint(){
 
@@ -196,11 +204,6 @@ public class ManageEmployees {
     public ManageEmployees() {
     }
 
-
-    public static void main(String[] args) {
-        new ManageEmployees();
-
-    }
 
     public class EditWindow extends JFrame {
         public EditWindow() throws HeadlessException {
@@ -294,25 +297,21 @@ public class ManageEmployees {
             add(buttonSave);
             add(buttonCancel);
 
-            buttonCancel.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    dispose();
-                }
-            });
+            buttonCancel.addActionListener(e -> dispose());
 
             // Fixme: Ser inte bra ut såhär, Gör rent i klassen generellt
-            buttonSave.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (e.getSource() == buttonSave){
+            buttonSave.addActionListener(e -> {
+                if (e.getSource() == buttonSave){
 
+                    try {
                         saveButton(namnField.getText(),surNameField.getText(),genderField.getSelectedItem().toString(),
                                 birthDateField.getText(), telNoField.getText(),
                                 salaryField.getText(), departmentField.getText(), roleField.getSelectedItem().toString());
-
-
+                    } catch (IOException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
                     }
+
+
                 }
             });
         }
@@ -331,7 +330,7 @@ public class ManageEmployees {
          * @param roleFieldText
          * @return
          */
-        public Employee saveButton(String nameFieldText, String surNameFieldText, String genderFieldText, String birthDateFieldText, String telNoFieldText, String salaryFieldText, String departmentFieldText, String roleFieldText){
+        public Employee saveButton(String nameFieldText, String surNameFieldText, String genderFieldText, String birthDateFieldText, String telNoFieldText, String salaryFieldText, String departmentFieldText, String roleFieldText) throws IOException {
 
             Employee addedEmployee = new Employee(nameFieldText, surNameFieldText,genderFieldText ,birthDateFieldText, departmentFieldText, telNoFieldText ,Double.parseDouble(salaryFieldText), roleFieldText);
 
@@ -350,36 +349,118 @@ public class ManageEmployees {
          * @param dao
          * @param department
          */
-        public void updateEmployeeWindow(Employee addedEmployee, DAO dao, String department){
+        public void updateEmployeeWindow(Employee addedEmployee, DAO dao, String department) throws IOException {
 
-            final String cardiology = "Cardiology";
-            final String anaesthetics = "Anaesthetics";
-            final String surgery = "Surgery";
-            final String criticalCare = "Critical care";
+            String info = "";
+
 
             // Depending on the chosen department for the employee, he/she will be added to said department list.
             switch (department) {
                 case cardiology -> {
                     dao.cardiologyList.add(addedEmployee);
-                    new ManageEmployees(dao.cardiologyList);
+                    info = addedEmployee.writeInfo();
+                    addEmployeeToTextFile(cardiologyFile, info);
+                    new ManageEmployees(dao.cardiologyList,cardiologyFile);
                 }
                 case anaesthetics -> {
                     dao.anaestheticsList.add(addedEmployee);
-                    new ManageEmployees(dao.anaestheticsList);
+                    info = addedEmployee.writeInfo();
+                    addEmployeeToTextFile(anaestheticsFile, info);
+                    new ManageEmployees(dao.anaestheticsList,anaestheticsFile);
                 }
                 case surgery -> {
                     dao.surgeryList.add(addedEmployee);
-                    new ManageEmployees(dao.surgeryList);
+                    info = addedEmployee.writeInfo();
+                    addEmployeeToTextFile(surgeryFile, info);
+                    new ManageEmployees(dao.surgeryList,surgeryFile);
                 }
                 case criticalCare -> {
                     dao.criticalCareList.add(addedEmployee);
-                    new ManageEmployees(dao.criticalCareList);
+                    info = addedEmployee.writeInfo();
+                    addEmployeeToTextFile(criticalCareFile, info);
+                    new ManageEmployees(dao.criticalCareList,criticalCareFile);
                 }
             }
+
 
             frame.dispose();
             frame.revalidate();
             frame.repaint();
         }
+
+        private void addEmployeeToTextFile(String filePath, String EmployeeInfo) throws IOException {
+            writer = new FileWriter(filePath, true);
+
+            try {
+                writer.write("\n" + EmployeeInfo);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            writer.close();
+
+        }
+
+
     }
+    public void RemoveEmployee(List<Employee> list, DAO dao, String filePath) throws IOException {
+        String info = "";
+        // Depending on the chosen department for the employee, he/she will be removed from said department list.
+        String input = JOptionPane.showInputDialog("Vem vill du ta bort från avdelningen?");
+
+        for (Employee e :list
+             ) {
+            if (e.getFirstName().equalsIgnoreCase(input)){
+                info = e.writeInfo();
+                dao.surgeryList.remove(e);
+            }
+        }
+
+        RemoveEmployeeFromTextFile(filePath, info, dao);
+
+        frame.dispose();
+        frame.revalidate();
+        frame.repaint();
+
+        for (Employee e:dao.surgeryList
+             ) {
+            e.writeInfo();
+        }
+        new ManageEmployees(dao.surgeryList,"Lists\\CardiologyEmployees");
+
+    }
+
+    private void RemoveEmployeeFromTextFile(String filePath, String employeeInfo, DAO dao) throws IOException {
+        File tempFile = new File("Lists\\tempEmployeeList");
+        File newFile = new File(filePath);
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        BufferedWriter writer2 = new BufferedWriter(new FileWriter(tempFile));
+        String currentLine;
+
+        try {
+
+            while ((currentLine = reader.readLine()) != null){
+                System.out.println(employeeInfo);
+                if (!currentLine.trim().equals(employeeInfo)){
+                    writer2.write(currentLine+"\n");
+                    writer2.flush();
+                }
+                else if (currentLine.trim().equals(employeeInfo)){
+                    System.out.println(currentLine + "... togs bort");
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        writer2.close();
+        reader.close();
+
+        newFile.delete();
+        tempFile.renameTo(new File(filePath));
+
+
+    }
+
+
 }

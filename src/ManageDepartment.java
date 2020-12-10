@@ -3,6 +3,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.List;
 /**
  * Created by Salah Abdinoor
@@ -25,12 +26,14 @@ public class ManageDepartment extends JFrame implements ActionListener {
     private final String cardiologyCase = "Cardiology";
     private final String criticalCareCase = "Critical Care";
 
+    protected final String filePath = "";
+
     JPanel panel = new JPanel();
     JLabel label = new JLabel("List of Departments");
     JButton searchDepartment = new JButton("Search Department");
     final JComboBox<String> listOfDepartments = new JComboBox<String>();
 
-    ManageDepartment() {
+    ManageDepartment() throws FileNotFoundException {
         setLayout(null);
         add(panel);
         panel.setLayout(null);
@@ -88,7 +91,19 @@ public class ManageDepartment extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
+    public String findFilePath(){
+
+        switch (listOfDepartments.getSelectedItem().toString()){
+            case surgeryCase -> {return "Lists\\SurgeryEmployees";}
+            case anaestheticsCase -> {  return "Lists\\AnaestheticsEmployees"; }
+            case cardiologyCase -> { return "Lists\\CardiologyEmployees"; }
+            case criticalCareCase -> {return "Lists\\CriticalCareEmployees"; }
+        }
+        return null;
+    }
+
+
+    public static void main(String[] args) throws FileNotFoundException {
 
         new ManageDepartment();
     }
@@ -101,7 +116,7 @@ public class ManageDepartment extends JFrame implements ActionListener {
         if (e.getSource() == searchDepartment) {
 
             dispose();
-            ManageEmployees m = new ManageEmployees(findDepartmentList());
+            ManageEmployees m = new ManageEmployees(findDepartmentList(), findFilePath());
 
             }
         }

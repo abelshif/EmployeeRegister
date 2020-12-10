@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.List.*;
 
 
@@ -25,7 +26,7 @@ public class Login extends JFrame implements ActionListener {
     JComboBox loginComboBox = new JComboBox(loginName);
 
 
-    public Login() {
+    public Login() throws FileNotFoundException {
         setLayout(null);
         loginPanel.setLayout(null);
         loginPanel.setVisible(true);
@@ -70,27 +71,31 @@ public class Login extends JFrame implements ActionListener {
         if (userNameText.getText().equals("hr") && passwordField.getText().equals("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
             dispose();
-            ManageDepartment MD = new ManageDepartment();
+            try {
+                ManageDepartment MD = new ManageDepartment();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
         }
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
                 loginComboBox.getSelectedItem().toString().equals("Surgery")){
            dispose();
-            ManageEmployees ME = new ManageEmployees(dao.surgeryList);
+            ManageEmployees ME = new ManageEmployees(dao.surgeryList, "Lists\\SurgeryEmployees");
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
                 loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
           dispose();
-            ManageEmployees ME = new ManageEmployees(dao.anaestheticsList);
+            ManageEmployees ME = new ManageEmployees(dao.anaestheticsList, "Lists\\AnaestheticsEmployees");
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
                 loginComboBox.getSelectedItem().toString().equals("Cardiology")){
           dispose();
-            ManageEmployees ME = new ManageEmployees(dao.cardiologyList);
+            ManageEmployees ME = new ManageEmployees(dao.cardiologyList, "Lists\\CardiologyEmployees");
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
                 loginComboBox.getSelectedItem().toString().equals("Critical care")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
+            ManageEmployees ME = new ManageEmployees(dao.criticalCareList, "Lists\\CriticalCareEmployees");
         }
         else
             JOptionPane.showMessageDialog(this, "Felaktlig login information");
@@ -98,7 +103,7 @@ public class Login extends JFrame implements ActionListener {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         new Login();
     }
 

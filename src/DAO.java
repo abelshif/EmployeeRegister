@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Salah Abdinoor
@@ -10,71 +14,87 @@ import java.util.List;
  */
 public class DAO {
 
+    private String filePath;
+    private Scanner s;
+    private FileWriter writer;
+    private String data;
+
+    private String firstName;
+    private String lastName;
+    private String gender;
+    private String birthDate;
+    private double salary;
+    private String department;
+    private String phoneNumber;
+    private String specialization;
+
+    private String cardiologyFile = "Lists\\CardiologyEmployees";
+    private String surgeryFile = "Lists\\SurgeryEmployees";
+    private String criticalCareFile = "Lists\\CriticalCareEmployees";
+    private String anaestheticsFile = "Lists\\AnaestheticsEmployees";
 
 
     List<Employee>  surgeryList = new ArrayList<>();
-    Employee sur1 = new Employee("Salah", "Abdinoor", "Man", "950510-1932", "Surgery", "072-0452176", 78588, "Doctor");
-
-    Employee sur2 = new Employee("Adam", "Nordström", "Man", "890510-8648", "Surgery", "076-7777890", 78588, "Doctor");
-
-    Employee sur3 = new Employee("Peter", "Johansson", "Man", "690629-6576", "Surgery", "070-2447196", 38240, "Nurse");
 
     List<Employee> anaestheticsList = new ArrayList<>();
-    Employee ana1 = new Employee("Sven", "Karlsson", "Man", "820920-6807", "Anaesthetics", "073-9757058", 78588, "Doctor");
-
-    Employee ana2 = new Employee("Johan", "Nilsson", "Man", "621126-9136", "Anaesthetics", "073-5652021", 38240, "Nurse");
-
-    Employee ana3 = new Employee("David", "Eriksson", "Man", "671207-0868", "Anaesthetics", "072-2271560", 38240, "Nurse");
 
     List<Employee> cardiologyList = new ArrayList<>();
-    Employee car1 = new Employee("Astrid", "Lindberg", "Kvinna", "770319-9148", "Cardiology", "072-2271565", 78588, "Doctor");
-
-    Employee car2 = new Employee("Olivia", "Olsson", "Kvinna", "960530-0715", "Cardiology", "072-2293320", 38240, "Nurse");
-
-    Employee car3 = new Employee("Alice", "Wallin", "Kvinna", "860517-8170", "Cardiology", "070-8858887", 38240, "Nurse");
 
     List<Employee> criticalCareList = new ArrayList<>();
-    Employee cri1 = new Employee("Maja", "Dahlqvist", "Kvinna", "720908-3414", "Critical care", "076-8802553", 78588, "Doctor");
-
-    Employee cri2 = new Employee("Vera", "Bergström", "Kvinna", "580215-1877", "Critical care", "073-0573673", 38240, "Nurse");
-
-    Employee cri3 = new Employee("Ebba", "Elofsson", "Kvinna", "640701-8420", "Critical care", "072-2221527", 38240, "Nurse");
-
-    public DAO() {
-
-        surgeryList.add(sur1);
-        surgeryList.add(sur2);
-        surgeryList.add(sur3);
-
-        anaestheticsList.add(ana1);
-        anaestheticsList.add(ana2);
-        anaestheticsList.add(ana3);
-
-        cardiologyList.add(car1);
-        cardiologyList.add(car2);
-        cardiologyList.add(car3);
-
-        criticalCareList.add(cri1);
-        criticalCareList.add(cri2);
-        criticalCareList.add(cri3);
-    }
-
-    public List<Employee> getAnaestheticsList() {
-        return anaestheticsList;
-    }
 
 
-
-    private void run() {
-
-
-
-
+    public DAO() throws FileNotFoundException {
+        createSurgeryList(surgeryFile, surgeryList);
+        createCriticalCareList(criticalCareFile, criticalCareList);
+        createCardiologyList(cardiologyFile, cardiologyList);
+        createAnaestheticsList(anaestheticsFile, anaestheticsList);
 
     }
 
-    public static void main(String[] args) {
-        new DAO().run();
+    private void createAnaestheticsList(String anaestheticsFile, List<Employee> anaestheticsList) throws FileNotFoundException {
+        ReadFromList(anaestheticsFile, anaestheticsList);
     }
+
+    private void createCardiologyList(String cardiologyFile, List<Employee> cardiologyList) throws FileNotFoundException {
+        ReadFromList(cardiologyFile, cardiologyList);
+    }
+
+    private void createCriticalCareList(String criticalCareFile, List<Employee> criticalCareList) throws FileNotFoundException {
+        ReadFromList(criticalCareFile, criticalCareList);
+    }
+
+    private void createSurgeryList(String surgeryFile, List<Employee> surgeryList) throws FileNotFoundException {
+        ReadFromList(surgeryFile, surgeryList);
+    }
+
+    public void ReadFromList(String filePath, List<Employee> list) throws FileNotFoundException {
+        s = new Scanner(new FileReader(filePath));
+        try {
+            while (s.hasNextLine()) {
+                data = s.nextLine();
+                String[] temp = data.split(",");
+                firstName = temp[0];
+                lastName = temp[1];
+                gender = temp[2];
+                birthDate = temp[3];
+                department = temp[4];
+                phoneNumber = temp[5];
+                salary = Double.parseDouble(temp[6]);
+                specialization = temp[7];
+
+                list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization));
+            }
+            s.close();
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+        for (Employee e:list
+             ) {
+            e.writeInfo();
+        }
+    }
+
+
 
 }

@@ -32,10 +32,9 @@ public class TestingList {
     private String birthDate;
     private double salary;
     private String department;
-    //private Department department?;
     private String phoneNumber;
     private String specialization;
-    private String[] departments = {"Kardiologi", "Kirurgi", "Akuten"};
+    private String[] departments = {"Kardiologi", "Kirurgi", "Akuten", "Anestesi"};
 
     public TestingList() throws IOException {
         while (true){
@@ -169,19 +168,7 @@ public class TestingList {
         newFile.delete();
         tempFile.renameTo(new File(filePath));
 
-        int choice = JOptionPane.showConfirmDialog(null, "Vill du flytta den anställda till en annan avdelning?");
-        if (choice == 0) {
-            choice = JOptionPane.showOptionDialog(null, "Till vilken avdelning?", null, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
-            if (choice == 0){
-                SwapDepartment(employeeInfo, cardiologyFile);
-            }
-            else if (choice == 1){
-                SwapDepartment(employeeInfo, surgeryFile);
-            }
-            else if (choice == 2){
-                SwapDepartment(employeeInfo, criticalCareFile);
-            }
-        }
+
 
 
     }

@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 /**
  * Created by Axel Jeansson
  * Date: 2020-11-30
@@ -16,15 +13,12 @@ public class Employee implements GenerateID {
     private double salary;
     private String department;
     private String phoneNumber;
-    private String specialization;
-    private String info;
     private String role;
+    private String info;
 
 
 
     public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization){
-
-    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String role){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -32,18 +26,9 @@ public class Employee implements GenerateID {
         this.department = department;
         this.phoneNumber = phoneNumber;
         this.salary = salary;
-        this.specialization= specialization;
-        this.role = role;
+        this.role = specialization;
     }
 
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
 
     public String getFirstName() {
@@ -93,8 +78,8 @@ public class Employee implements GenerateID {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getSpecialization() {
-        return specialization;
+    public String getRole() {
+        return role;
     }
 
     public void printInfo(){
@@ -104,11 +89,11 @@ public class Employee implements GenerateID {
                 "\nAvdelning: "+getDepartment()+
                 "\nTelefonnummer: "+getPhoneNumber()+
                 "\nLön: "+getSalary()+
-                "\nÖvrigt: "+getSpecialization());
+                "\nÖvrigt: "+ getRole());
     }
 
     public String writeInfo(){
-        info = getFirstName()+","+getLastName()+","+getGender()+","+getBirthDate()+","+getDepartment()+","+getPhoneNumber()+","+getSalary()+","+getSpecialization();
+        info = getFirstName()+","+getLastName()+","+getGender()+","+getBirthDate()+","+getDepartment()+","+getPhoneNumber()+","+getSalary()+","+ getRole();
         return info;
     }
 
