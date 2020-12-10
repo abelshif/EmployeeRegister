@@ -29,7 +29,7 @@ public class Login extends JFrame implements ActionListener {
         setLayout(null);
         loginPanel.setLayout(null);
         loginPanel.setVisible(true);
-        //loginPanel.setBackground(Color.cyan);
+
 
         welcomeLabel.setBounds(100, 25, 250, 30);
         userLabel.setBounds(100, 90, 100, 30);

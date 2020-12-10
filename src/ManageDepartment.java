@@ -34,9 +34,7 @@ public class ManageDepartment extends JFrame implements ActionListener {
         setLayout(null);
         add(panel);
         panel.setLayout(null);
-       // panel.setBackground(new Color(0, 255, 51));
-        //panel.add(Box.createRigidArea(new Dimension(100, 80)));
-        //panel.setBorder(new EmptyBorder(50, 50, 50, 50));
+
 
         panel.add(label);
         label.setBounds(100, 70, 250, 30);
@@ -44,16 +42,14 @@ public class ManageDepartment extends JFrame implements ActionListener {
         panel.add(listOfDepartments);
         listOfDepartments.setBounds(90, 110, 150, 30);
 
-        //panel.add(Box.createRigidArea(new Dimension(100, 15)));
+
 
         panel.add(searchDepartment);
         searchDepartment.setBounds(90, 170, 150, 30);
         panel.setBorder(BorderFactory.createEtchedBorder());
         panel.setBounds(10,10, 315, 345);
 
-        //panel.add(Box.createRigidArea(new Dimension(100, 170)));
 
-        // Listan med avdelnigar
         listOfDepartments();
 
         searchDepartment.addActionListener(this);
