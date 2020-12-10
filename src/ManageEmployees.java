@@ -110,6 +110,7 @@ public class ManageEmployees {
         RemoveEmployeeButton = new JButton("Delete/Move");
         RemoveEmployeeButton.setSize(100, 30);
         RemoveEmployeeButton.setLocation(250, 370);
+        RemoveEmployeeButton.setFont(new Font(RemoveEmployeeButton.getFont().getName(), RemoveEmployeeButton.getFont().getStyle(), 10));
         RemoveEmployeeButton.addActionListener(e -> {
             try {
                 RemoveEmployee(employeeList,filePath,department);
