@@ -19,12 +19,12 @@ public class ManageDepartment extends JFrame implements ActionListener {
     Department surgery = new Department("Surgery", dao.surgeryList.size(), "third floor - first ward ");
     Department anaesthetics = new Department("Anaesthetics", dao.anaestheticsList.size(), "third floor - second ward");
     Department cardiology = new Department("Cardiology", dao.cardiologyList.size(), "second floor - first ward");
-    Department criticalCare = new Department("Critical Care", dao.criticalCareList.size(), "first floor - fifth ward");
+    Department criticalCare = new Department("Critical care", dao.criticalCareList.size(), "first floor - fifth ward");
 
     private final String surgeryCase = "Surgery";
     private final String anaestheticsCase = "Anaesthetics";
     private final String cardiologyCase = "Cardiology";
-    private final String criticalCareCase = "Critical Care";
+    private final String criticalCareCase = "Critical care";
 
     protected final String filePath = "";
 

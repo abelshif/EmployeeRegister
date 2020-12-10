@@ -72,7 +72,7 @@ public class Login extends JFrame implements ActionListener {
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
             dispose();
             try {
-                ManageDepartment MD = new ManageDepartment();
+                new ManageDepartment();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }

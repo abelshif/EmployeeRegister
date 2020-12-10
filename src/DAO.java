@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -70,19 +71,24 @@ public class DAO {
     public void ReadFromList(String filePath, List<Employee> list) throws FileNotFoundException {
         s = new Scanner(new FileReader(filePath));
         try {
+
             while (s.hasNextLine()) {
                 data = s.nextLine();
-                String[] temp = data.split(",");
-                firstName = temp[0];
-                lastName = temp[1];
-                gender = temp[2];
-                birthDate = temp[3];
-                department = temp[4];
-                phoneNumber = temp[5];
-                salary = Double.parseDouble(temp[6]);
-                specialization = temp[7];
+                if (data.isEmpty()){
+                    continue;
+                }
+                    String[] temp = data.split(",");
+                    firstName = temp[0];
+                    lastName = temp[1];
+                    gender = temp[2];
+                    birthDate = temp[3];
+                    department = temp[4];
+                    phoneNumber = temp[5];
+                    salary = Double.parseDouble(temp[6]);
+                    specialization = temp[7];
 
-                list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization));
+                    list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization));
+
             }
             s.close();
 

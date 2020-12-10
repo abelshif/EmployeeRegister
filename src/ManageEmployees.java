@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ManageEmployees {
 
@@ -25,6 +26,7 @@ public class ManageEmployees {
     private String criticalCareFile = "Lists\\CriticalCareEmployees";
     private String anaestheticsFile = "Lists\\AnaestheticsEmployees";
     FileWriter writer;
+    Scanner s;
 
     final String cardiology = "Cardiology";
     final String anaesthetics = "Anaesthetics";
@@ -105,7 +107,7 @@ public class ManageEmployees {
 
         frame.add(addEmployeeButton);
 
-        RemoveEmployeeButton = new JButton("Delete");
+        RemoveEmployeeButton = new JButton("Delete/Move");
         RemoveEmployeeButton.setSize(100, 30);
         RemoveEmployeeButton.setLocation(250, 370);
         RemoveEmployeeButton.addActionListener(e -> {
@@ -118,7 +120,7 @@ public class ManageEmployees {
         });
         frame.add(RemoveEmployeeButton);
 
-        UpdateButton = new JButton("Update");
+        UpdateButton = new JButton("Update info");
         UpdateButton.setSize(100, 30);
         UpdateButton.setLocation(450, 370);
         UpdateButton.addActionListener(e -> {
@@ -212,9 +214,6 @@ public class ManageEmployees {
             }
         }
         return null;
-    }
-
-    public ManageEmployees() {
     }
 
 
@@ -403,20 +402,35 @@ public class ManageEmployees {
 
         private void addEmployeeToTextFile(String filePath, String EmployeeInfo) throws IOException {
             writer = new FileWriter(filePath, true);
+            s = new Scanner(new FileReader(filePath));
+            String data = "";
 
             try {
-                writer.write(EmployeeInfo+"\n");
-            }catch (Exception e){
+                while (s.hasNext()) {
+                    data = s.nextLine();
+                    if (data.trim().isEmpty()) {
+                        writer.write(data+"\n");
+                    }
+                }
+            }catch (FileNotFoundException e){
                 e.printStackTrace();
             }
 
+            try{
+                writer.write(EmployeeInfo+"\n");
+            }catch (IOException exception){
+                exception.printStackTrace();
+            }
+
             writer.close();
+            s.close();
 
         }
 
 
     }
     public void RemoveEmployee(List<Employee> list, String filePath, String department) throws IOException {
+        String tempDep = "";
         // Depending on the chosen department for the employee, he/she will be removed from said department list.
         File tempFile = new File("Lists\\tempEmployeeList");
         File newFile = new File(filePath);
@@ -427,7 +441,6 @@ public class ManageEmployees {
 
         for (Employee e:list
         ) {
-            System.out.println(e.writeInfo());
             if (e.getFirstName().equalsIgnoreCase(name)) {
                 System.out.println("Test hittades!");
                 employeeInfo = e.writeInfo();
@@ -439,7 +452,6 @@ public class ManageEmployees {
         try {
 
             while ((currentLine = reader.readLine()) != null){
-                System.out.println(employeeInfo);
                 if (!currentLine.trim().equals(employeeInfo)){
                     writer2.write(currentLine+"\n");
                     writer2.flush();
@@ -462,16 +474,20 @@ public class ManageEmployees {
             if (userChoice == 0){
                 userChoice = JOptionPane.showOptionDialog(null, "Till vilken avdelning?", "Flytta anställd", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
                 if (userChoice == 0){
-                    SwapDepartment(employeeInfo, cardiologyFile);
+                    tempDep = employeeInfo.replace(department, "Cardiology");
+                    SwapDepartment(tempDep, cardiologyFile);
                 }
                 else if (userChoice == 1){
-                    SwapDepartment(employeeInfo, surgeryFile);
+                    tempDep = employeeInfo.replace(department, "Surgery");
+                    SwapDepartment(tempDep, surgeryFile);
                 }
                 else if (userChoice == 2){
-                    SwapDepartment(employeeInfo, criticalCareFile );
+                    tempDep = employeeInfo.replace(department, "Critical care");
+                    SwapDepartment(tempDep, criticalCareFile );
                 }
                 else if(userChoice == 3){
-                    SwapDepartment(employeeInfo, anaestheticsFile);
+                    tempDep = employeeInfo.replace(department, "Anaesthetics");
+                    SwapDepartment(tempDep, anaestheticsFile);
                 }
                 else
                     System.out.println("Anställd borttagen");
@@ -494,6 +510,8 @@ public class ManageEmployees {
             }
         }
 
+
+
         frame.dispose();
         frame.revalidate();
         frame.repaint();
@@ -505,13 +523,28 @@ public class ManageEmployees {
 
     private void SwapDepartment(String employeeInfo, String filePath) throws IOException {
         writer = new FileWriter(filePath, true);
+        s = new Scanner(new FileReader(filePath));
+        String data = "";
 
         try {
-            writer.write("\n"+employeeInfo);
+            while (s.hasNext()) {
+                data = s.nextLine();
+                if (data.trim().isEmpty()) {
+                    writer.write(data);
+                    writer.write("\n");
+                }
+            }
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+
+        try {
+            writer.write(employeeInfo+"\n");
         }catch (IOException e){
             e.printStackTrace();
         }
         writer.close();
+        s.close();
     }
 
 
