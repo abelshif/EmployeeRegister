@@ -97,7 +97,7 @@ public class DAO {
         }
         for (Employee e:list
              ) {
-            e.writeInfo();
+            e.printEmployeeInfo();
         }
     }
 

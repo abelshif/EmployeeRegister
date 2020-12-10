@@ -68,34 +68,34 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (userNameText.getText().equalsIgnoreCase("hr") && passwordField.getText().equalsIgnoreCase("hr") &&
+        if (userNameText.getText().equals("hr") && passwordField.getText().equals("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
             dispose();
             try {
-                ManageDepartment MD = new ManageDepartment();
+                new ManageDepartment();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
         }
-        else if (userNameText.getText().equalsIgnoreCase("surgery") && passwordField.getText().equalsIgnoreCase("surgery") &&
-                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
+        else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
+                loginComboBox.getSelectedItem().toString().equals("Surgery")){
             dispose();
-            new ManageEmployees(dao.surgeryList);
+            new ManageEmployees(dao.surgeryList, "Lists\\SurgeryEmployees","Surgery");
         }
-        else if (userNameText.getText().equalsIgnoreCase("anaesthetics") && passwordField.getText().equalsIgnoreCase("anaesthetics") &&
-                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
+        else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
+                loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
             dispose();
-            new ManageEmployees(dao.anaestheticsList);
+            new ManageEmployees(dao.anaestheticsList, "Lists\\AnaestheticsEmployees", "Anaesthetics");
         }
-        else if (userNameText.getText().equalsIgnoreCase("cardiology") && passwordField.getText().equalsIgnoreCase("cardiology") &&
-                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
+        else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
+                loginComboBox.getSelectedItem().toString().equals("Cardiology")){
             dispose();
-            new ManageEmployees(dao.cardiologyList);
+            new ManageEmployees(dao.cardiologyList, "Lists\\CardiologyEmployees", "Cardiology");
         }
-        else if (userNameText.getText().equalsIgnoreCase("criticalcare") && passwordField.getText().equalsIgnoreCase("criticalcare") &&
-                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
+        else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
+                loginComboBox.getSelectedItem().toString().equals("Critical care")){
             dispose();
-            new ManageEmployees(dao.criticalCareList);
+            new ManageEmployees(dao.criticalCareList, "Lists\\CriticalCareEmployees", "Critical care");
         }
         else
             JOptionPane.showMessageDialog(this, "Felaktlig login information");

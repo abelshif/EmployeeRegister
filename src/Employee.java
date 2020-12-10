@@ -7,7 +7,7 @@ import java.util.Random;
  * Project: AOD2Employee
  * Copyright: MIT
  */
-public class Employee implements GenerateID {
+public class Employee implements GenerateID, PrintInfo {
     private String firstName;
     private String lastName;
     private String gender;
@@ -84,7 +84,9 @@ public class Employee implements GenerateID {
         return role;
     }
 
-    public void printInfo(){
+
+    @Override
+    public void printEmployeeInfo() {
         System.out.println("Namn: "+getFirstName()+" "+getLastName()+
                 "\nKön: "+getGender()+
                 "\nFödelsedag: "+getBirthDate()+

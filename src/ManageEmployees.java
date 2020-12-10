@@ -101,7 +101,7 @@ public class ManageEmployees {
         addEmployeeButton.setSize(100, 30);
         addEmployeeButton.setLocation(50, 370);
         addEmployeeButton.addActionListener(e -> {
-            JFrame addFrame = new EditWindow();
+            JFrame addFrame = new EditWindow(department);
         });
 
 
@@ -125,12 +125,12 @@ public class ManageEmployees {
         UpdateButton.setSize(100, 30);
         UpdateButton.setLocation(450, 370);
         UpdateButton.addActionListener(e -> {
-            JFrame updateFrame = new EditWindow();
+            JFrame updateFrame = new EditWindow(department);
         });
         frame.add(UpdateButton);
 
         backToMenu = new JButton("Tillbaka");
-        backToMenu.setBounds(650, 370, 100 ,30);
+        backToMenu.setBounds(650, 470, 100 ,30);
         backToMenu.addActionListener(e -> {
             try {
                 new ManageDepartment();
@@ -145,16 +145,8 @@ public class ManageEmployees {
         printEmployeeCard = new JButton("Print Card");
         printEmployeeCard.setSize(100, 30);
         printEmployeeCard.setLocation(650, 370);
-        printEmployeeCard.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                JOptionPane.showMessageDialog(null,
-                        employeeList.get(0).generateID());
-
-            }
-        });
+        printEmployeeCard.addActionListener(e -> JOptionPane.showMessageDialog(null,
+                employeeList.get(0).generateID()));
 
         frame.add(printEmployeeCard);
 
@@ -233,7 +225,7 @@ public class ManageEmployees {
 
 
     public class EditWindow extends JFrame {
-        public EditWindow() throws HeadlessException {
+        public EditWindow(String department) throws HeadlessException {
 
             JLabel addName = new JLabel("Name");
             JLabel addSurName = new JLabel("Surname");
@@ -272,10 +264,7 @@ public class ManageEmployees {
             JTextField telNoField = new JTextField(50);
             JTextField salaryField = new JTextField(50);
             JComboBox<String>departmentField= new JComboBox<>();
-            departmentField.addItem("Surgery");
-            departmentField.addItem("Anaesthetics");
-            departmentField.addItem("Cardiology");
-            departmentField.addItem("Critical Care");
+            departmentField.addItem(department);
             //JTextField departmentField = new JTextField(50);
             //JTextField roleField = new JTextField(50);
             JComboBox<String> roleField= new JComboBox<>();
@@ -338,7 +327,7 @@ public class ManageEmployees {
                     try {
                         saveButton(namnField.getText(), surNameField.getText(), genderField.getSelectedItem().toString(),
                                 birthDateField.getText(), telNoField.getText(),
-                                salaryField.getText(), departmentField.getText(), roleField.getSelectedItem().toString());
+                                salaryField.getText(), departmentField.getSelectedItem().toString(), roleField.getSelectedItem().toString());
                     } catch (IOException fileNotFoundException) {
                         fileNotFoundException.printStackTrace();
                     }
