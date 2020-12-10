@@ -70,27 +70,27 @@ public class Login extends JFrame implements ActionListener {
         if (userNameText.getText().equalsIgnoreCase("hr") && passwordField.getText().equals("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
             dispose();
-            ManageDepartment MD = new ManageDepartment();
+            new ManageDepartment();
         }
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
                 loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.surgeryList);
+            new ManageEmployees(dao.surgeryList);
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
                 loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.anaestheticsList);
+            new ManageEmployees(dao.anaestheticsList);
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
                 loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.cardiologyList);
+            new ManageEmployees(dao.cardiologyList);
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
                 loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
+            new ManageEmployees(dao.criticalCareList);
         }
         else
             JOptionPane.showMessageDialog(this, "Felaktlig login information");
