@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.List.*;
 
 
@@ -25,7 +26,7 @@ public class Login extends JFrame implements ActionListener {
     JComboBox loginComboBox = new JComboBox(loginName);
 
 
-    public Login() {
+    public Login() throws FileNotFoundException {
         setLayout(null);
         loginPanel.setLayout(null);
         loginPanel.setVisible(true);
@@ -70,34 +71,38 @@ public class Login extends JFrame implements ActionListener {
         if (userNameText.getText().equalsIgnoreCase("hr") && passwordField.getText().equalsIgnoreCase("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
             dispose();
-            ManageDepartment MD = new ManageDepartment();
+            try {
+                ManageDepartment MD = new ManageDepartment();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
         }
         else if (userNameText.getText().equalsIgnoreCase("surgery") && passwordField.getText().equalsIgnoreCase("surgery") &&
                 loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.surgeryList);
+            new ManageEmployees(dao.surgeryList);
         }
         else if (userNameText.getText().equalsIgnoreCase("anaesthetics") && passwordField.getText().equalsIgnoreCase("anaesthetics") &&
                 loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.anaestheticsList);
+            new ManageEmployees(dao.anaestheticsList);
         }
         else if (userNameText.getText().equalsIgnoreCase("cardiology") && passwordField.getText().equalsIgnoreCase("cardiology") &&
                 loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.cardiologyList);
+            new ManageEmployees(dao.cardiologyList);
         }
         else if (userNameText.getText().equalsIgnoreCase("criticalcare") && passwordField.getText().equalsIgnoreCase("criticalcare") &&
                 loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
-            ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
+            new ManageEmployees(dao.criticalCareList);
         }
         else
             JOptionPane.showMessageDialog(this, "Felaktlig login information");
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         new Login();
     }
 
