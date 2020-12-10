@@ -69,27 +69,27 @@ public class Login extends JFrame implements ActionListener {
 
         if (userNameText.getText().equalsIgnoreCase("hr") && passwordField.getText().equals("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
-            frame.dispose();
+            dispose();
             ManageDepartment MD = new ManageDepartment();
         }
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
                 loginComboBox.getSelectedItem().toString().equals("Surgery")){
-            frame.dispose();
+            dispose();
             ManageEmployees ME = new ManageEmployees(dao.surgeryList);
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
                 loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
-            frame.dispose();
+            dispose();
             ManageEmployees ME = new ManageEmployees(dao.anaestheticsList);
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
                 loginComboBox.getSelectedItem().toString().equals("Cardiology")){
-            frame.dispose();
+            dispose();
             ManageEmployees ME = new ManageEmployees(dao.cardiologyList);
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
                 loginComboBox.getSelectedItem().toString().equals("Critical care")){
-            frame.dispose();
+            dispose();
             ManageEmployees ME = new ManageEmployees(dao.criticalCareList);
         }
         else
