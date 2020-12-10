@@ -145,8 +145,20 @@ public class ManageEmployees {
         printEmployeeCard = new JButton("Print Card");
         printEmployeeCard.setSize(100, 30);
         printEmployeeCard.setLocation(650, 370);
-        printEmployeeCard.addActionListener(e -> JOptionPane.showMessageDialog(null,
-                employeeList.get(0).generateID()));
+        printEmployeeCard.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(table.getSelectedRow()!=-1){
+                    new PassCard(table, tabelmodel);
+                } else {
+                    JOptionPane.showMessageDialog(frame,"OBS! Please select a row to print the card");
+                }
+
+            }
+
+        });
 
         frame.add(printEmployeeCard);
 
@@ -260,6 +272,7 @@ public class ManageEmployees {
             JComboBox<String> genderField = new JComboBox<>();
             genderField.addItem("Male");
             genderField.addItem("Female");
+            genderField.addItem("Unspecified");
             JTextField birthDateField = new JTextField(50);
             JTextField telNoField = new JTextField(50);
             JTextField salaryField = new JTextField(50);
