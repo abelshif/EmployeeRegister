@@ -22,7 +22,7 @@ public class Login extends JFrame implements ActionListener {
     JPasswordField passwordField = new JPasswordField();
 
     JButton loginButton = new JButton("LOGIN");
-    String loginName[] = {"HR", "Avdeling Chefer"};
+    String loginName[] = {"HR", "Head Of Department"};
     JComboBox loginComboBox = new JComboBox(loginName);
 
 
@@ -75,23 +75,23 @@ public class Login extends JFrame implements ActionListener {
             new ManageDepartment();
 
         } else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")) {
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")) {
             dispose();
             new ManageEmployees(dao.surgeryList);
         } else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")) {
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")) {
             dispose();
             new ManageEmployees(dao.anaestheticsList);
         } else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")) {
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")) {
             dispose();
             new ManageEmployees(dao.cardiologyList);
         } else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")) {
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")) {
             dispose();
             new ManageEmployees(dao.criticalCareList);
         } else
-            JOptionPane.showMessageDialog(this, "Felaktlig login information");
+            JOptionPane.showMessageDialog(this, "Incorrect login information");
 
     }
 
