@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.List.*;
 
 
@@ -53,7 +54,7 @@ public class Login extends JFrame implements ActionListener {
         loginPanel.add(loginButton);
 
         loginPanel.setBorder(BorderFactory.createEtchedBorder());
-        loginPanel.setBounds(10,10, 415, 345);
+        loginPanel.setBounds(10, 10, 415, 345);
         add(loginPanel);
         setTitle("Login page");
         setPreferredSize(new Dimension(450, 450));
@@ -64,6 +65,7 @@ public class Login extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -71,28 +73,24 @@ public class Login extends JFrame implements ActionListener {
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
             dispose();
             new ManageDepartment();
-        }
-        else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
+
+        } else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
+                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")) {
             dispose();
             new ManageEmployees(dao.surgeryList);
-        }
-        else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
+        } else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
+                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")) {
             dispose();
             new ManageEmployees(dao.anaestheticsList);
-        }
-        else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
+        } else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
+                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")) {
             dispose();
             new ManageEmployees(dao.cardiologyList);
-        }
-        else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
-                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")){
+        } else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
+                loginComboBox.getSelectedItem().toString().equals("Avdeling Chefer")) {
             dispose();
             new ManageEmployees(dao.criticalCareList);
-        }
-        else
+        } else
             JOptionPane.showMessageDialog(this, "Felaktlig login information");
 
     }
