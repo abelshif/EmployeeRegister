@@ -78,22 +78,22 @@ public class Login extends JFrame implements ActionListener {
             }
         }
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
-                loginComboBox.getSelectedItem().toString().equals("Surgery")){
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
             new ManageEmployees(dao.surgeryList, "Lists\\SurgeryEmployees","Surgery");
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
-                loginComboBox.getSelectedItem().toString().equals("Anaesthetics")){
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
             new ManageEmployees(dao.anaestheticsList, "Lists\\AnaestheticsEmployees", "Anaesthetics");
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
-                loginComboBox.getSelectedItem().toString().equals("Cardiology")){
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
             new ManageEmployees(dao.cardiologyList, "Lists\\CardiologyEmployees", "Cardiology");
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
-                loginComboBox.getSelectedItem().toString().equals("Critical care")){
+                loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
             new ManageEmployees(dao.criticalCareList, "Lists\\CriticalCareEmployees", "Critical care");
         }
