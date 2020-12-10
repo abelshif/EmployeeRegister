@@ -190,7 +190,6 @@ public class ManageEmployees {
         if (textToSearch.isEmpty()) { return employeeInfo; }
 
         // When searching
-
         String nameToCompare;
 
         for (Employee employee : employeeList) {
@@ -211,6 +210,7 @@ public class ManageEmployees {
     }
 
     public ManageEmployees() {
+
     }
 
 

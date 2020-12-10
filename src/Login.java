@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List.*;
 
 
 public class Login extends JFrame implements ActionListener {
@@ -51,8 +50,6 @@ public class Login extends JFrame implements ActionListener {
         loginPanel.add(loginLabel);
         loginPanel.add(loginComboBox);
         loginPanel.add(loginButton);
-
-
 
         add(loginPanel);
         setTitle("Login page");
