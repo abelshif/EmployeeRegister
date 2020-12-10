@@ -258,7 +258,12 @@ public class ManageEmployees {
             JTextField birthDateField = new JTextField(50);
             JTextField telNoField = new JTextField(50);
             JTextField salaryField = new JTextField(50);
-            JTextField departmentField = new JTextField(50);
+            JComboBox<String>departmentField= new JComboBox<>();
+            departmentField.addItem("Surgery");
+            departmentField.addItem("Anaesthetics");
+            departmentField.addItem("Cardiology");
+            departmentField.addItem("Critical Care");
+            //JTextField departmentField = new JTextField(50);
             //JTextField roleField = new JTextField(50);
             JComboBox<String> roleField= new JComboBox<>();
             roleField.addItem("Doctor");
@@ -326,7 +331,7 @@ public class ManageEmployees {
 
                         saveButton(namnField.getText(),surNameField.getText(),genderField.getSelectedItem().toString(),
                                 birthDateField.getText(), telNoField.getText(),
-                                salaryField.getText(), departmentField.getText(), roleField.getSelectedItem().toString());
+                                salaryField.getText(), departmentField.getSelectedItem().toString(), roleField.getSelectedItem().toString());
 
 
                     }

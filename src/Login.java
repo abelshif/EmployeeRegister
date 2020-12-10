@@ -67,7 +67,7 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (userNameText.getText().equals("hr") && passwordField.getText().equals("hr") &&
+        if (userNameText.getText().equalsIgnoreCase("hr") && passwordField.getText().equals("hr") &&
                 loginComboBox.getSelectedItem().toString().equals("HR")) {
             frame.dispose();
             ManageDepartment MD = new ManageDepartment();
