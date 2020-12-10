@@ -15,14 +15,16 @@ public class Employee implements GenerateID {
     private String birthDate;
     private double salary;
     private String department;
-    //private Department department?;
     private String phoneNumber;
     private String specialization;
     private String info;
+    private String role;
 
-    public Employee(){}
+
 
     public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization){
+
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String role){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -31,7 +33,18 @@ public class Employee implements GenerateID {
         this.phoneNumber = phoneNumber;
         this.salary = salary;
         this.specialization= specialization;
+        this.role = role;
     }
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 
     public String getFirstName() {
         return firstName;
