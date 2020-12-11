@@ -7,7 +7,7 @@ import java.util.Random;
  * Project: AOD2Employee
  * Copyright: MIT
  */
-public class Employee implements GenerateID {
+public class Employee implements GenerateID, PrintInfo {
     private String firstName;
     private String lastName;
     private String gender;
@@ -16,11 +16,13 @@ public class Employee implements GenerateID {
     private String department;
     private String phoneNumber;
     private String role;
+    private String info;
+    private String userID;
 
 
+    public Employee(){};
 
-
-    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String role){
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -28,17 +30,22 @@ public class Employee implements GenerateID {
         this.department = department;
         this.phoneNumber = phoneNumber;
         this.salary = salary;
-        this.role = role;
+        this.role = specialization;
+    }
+
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization, String userID){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.department = department;
+        this.phoneNumber = phoneNumber;
+        this.salary = salary;
+        this.role = specialization;
+        this.userID = userID;
     }
 
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
 
     public String getFirstName() {
@@ -88,13 +95,40 @@ public class Employee implements GenerateID {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setUserID(String userID){
+        this.userID = this.userID;
+    }
+    public String getUserID(){
+        return userID;
+    }
+
 
     @Override
-    public String generateID() {
+    public void printEmployeeInfo() {
+        System.out.println("Namn: "+getFirstName()+" "+getLastName()+
+                "\nKön: "+getGender()+
+                "\nFödelsedag: "+getBirthDate()+
+                "\nAvdelning: "+getDepartment()+
+                "\nTelefonnummer: "+getPhoneNumber()+
+                "\nLön: "+getSalary()+
+                "\nÖvrigt: "+ getRole());
+    }
+
+    public String writeInfo(){
+        info = getFirstName()+","+getLastName()+","+getGender()+","+getBirthDate()+","+getDepartment()+","+getPhoneNumber()+","+getSalary()+","+ getRole()+","+getUserID();
+        return info;
+    }
+
+    @Override
+    public String generateID(String firstName) {
 
         Random rand = new Random();
         int random = 100 + rand.nextInt(899);
-        return getFirstName() + "_" + random;
+        return firstName.toUpperCase() + "_" + random;
 
     }
 }

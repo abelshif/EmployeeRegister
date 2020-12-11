@@ -3,6 +3,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.List;
 /**
  * Created by Salah Abdinoor
@@ -18,25 +19,25 @@ public class ManageDepartment extends JFrame implements ActionListener {
     Department surgery = new Department("Surgery", dao.surgeryList.size(), "third floor - first ward ");
     Department anaesthetics = new Department("Anaesthetics", dao.anaestheticsList.size(), "third floor - second ward");
     Department cardiology = new Department("Cardiology", dao.cardiologyList.size(), "second floor - first ward");
-    Department criticalCare = new Department("Critical Care", dao.criticalCareList.size(), "first floor - fifth ward");
+    Department criticalCare = new Department("Critical care", dao.criticalCareList.size(), "first floor - fifth ward");
 
     private final String surgeryCase = "Surgery";
     private final String anaestheticsCase = "Anaesthetics";
     private final String cardiologyCase = "Cardiology";
-    private final String criticalCareCase = "Critical Care";
+    private final String criticalCareCase = "Critical care";
+
+    protected final String filePath = "";
 
     JPanel panel = new JPanel();
     JLabel label = new JLabel("List of Departments");
     JButton searchDepartment = new JButton("Search Department");
     final JComboBox<String> listOfDepartments = new JComboBox<String>();
 
-    ManageDepartment() {
+    ManageDepartment() throws FileNotFoundException {
         setLayout(null);
         add(panel);
         panel.setLayout(null);
-       // panel.setBackground(new Color(0, 255, 51));
-        //panel.add(Box.createRigidArea(new Dimension(100, 80)));
-        //panel.setBorder(new EmptyBorder(50, 50, 50, 50));
+
 
         panel.add(label);
         label.setBounds(100, 70, 250, 30);
@@ -44,16 +45,14 @@ public class ManageDepartment extends JFrame implements ActionListener {
         panel.add(listOfDepartments);
         listOfDepartments.setBounds(90, 110, 150, 30);
 
-        //panel.add(Box.createRigidArea(new Dimension(100, 15)));
+
 
         panel.add(searchDepartment);
         searchDepartment.setBounds(90, 170, 150, 30);
         panel.setBorder(BorderFactory.createEtchedBorder());
         panel.setBounds(10,10, 315, 345);
 
-        //panel.add(Box.createRigidArea(new Dimension(100, 170)));
 
-        // Listan med avdelnigar
         listOfDepartments();
 
         searchDepartment.addActionListener(this);
@@ -88,7 +87,19 @@ public class ManageDepartment extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
+    public String findFilePath(){
+
+        switch (listOfDepartments.getSelectedItem().toString()){
+            case surgeryCase -> {return "Lists\\SurgeryEmployees";}
+            case anaestheticsCase -> {  return "Lists\\AnaestheticsEmployees"; }
+            case cardiologyCase -> { return "Lists\\CardiologyEmployees"; }
+            case criticalCareCase -> {return "Lists\\CriticalCareEmployees"; }
+        }
+        return null;
+    }
+
+
+    public static void main(String[] args) throws FileNotFoundException {
 
         new ManageDepartment();
     }
@@ -101,7 +112,7 @@ public class ManageDepartment extends JFrame implements ActionListener {
         if (e.getSource() == searchDepartment) {
 
             dispose();
-            ManageEmployees m = new ManageEmployees(findDepartmentList());
+            ManageEmployees m = new ManageEmployees(findDepartmentList(), findFilePath(), listOfDepartments.getSelectedItem().toString(), "HR");
 
             }
         }

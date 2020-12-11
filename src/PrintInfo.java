@@ -6,6 +6,7 @@
  * Copyright: MIT
  */
 public interface PrintInfo {
-   void printEmployeeInfo(Employee employee);
+   void printEmployeeInfo();
+   String writeInfo();
 
 }
