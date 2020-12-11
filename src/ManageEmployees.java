@@ -21,18 +21,18 @@ public class ManageEmployees {
     private JScrollPane scrollPane;
     private DefaultTableModel tabelmodel;
     private String[] departments = {"Kardiologi", "Kirurgi", "Akuten", "Anestesi"};
-    private String cardiologyFile = "Lists\\CardiologyEmployees";
-    private String surgeryFile = "Lists\\SurgeryEmployees";
-    private String criticalCareFile = "Lists\\CriticalCareEmployees";
-    private String anaestheticsFile = "Lists\\AnaestheticsEmployees";
+    public static final String cardiologyFile = "Lists\\CardiologyEmployees";
+    public static final String surgeryFile = "Lists\\SurgeryEmployees";
+    public static final String criticalCareFile = "Lists\\CriticalCareEmployees";
+    public static final String anaestheticsFile = "Lists\\AnaestheticsEmployees";
     FileWriter writer;
     Scanner s;
 
-    final String cardiology = "Cardiology";
-    final String anaesthetics = "Anaesthetics";
-    final String surgery = "Surgery";
-    final String criticalCare = "Critical care";
-
+    public static final String cardiology = "Cardiology";
+    public static final String anaesthetics = "Anaesthetics";
+    public static final String surgery = "Surgery";
+    public static final String criticalCare = "Critical care";
+    private String authority;
 
 
     /**
@@ -78,7 +78,8 @@ public class ManageEmployees {
         return null;
     }
 
-    public ManageEmployees(List<Employee> employeeList, String filePath, String department) {
+    public ManageEmployees(List<Employee> employeeList, String filePath, String department,String authority) {
+        this.authority = authority;
 
         Object[][] convertedList = convertListTo2DObjectArray(employeeList);
         System.out.println("Listans storlek: " + employeeList.size());
@@ -101,7 +102,7 @@ public class ManageEmployees {
         addEmployeeButton.setSize(100, 30);
         addEmployeeButton.setLocation(50, 370);
         addEmployeeButton.addActionListener(e -> {
-            JFrame addFrame = new EditWindow(department);
+            JFrame addFrame = new EditWindow(department, frame, authority);
         });
 
 
@@ -125,7 +126,7 @@ public class ManageEmployees {
         UpdateButton.setSize(100, 30);
         UpdateButton.setLocation(450, 370);
         UpdateButton.addActionListener(e -> {
-            JFrame updateFrame = new EditWindow(department);
+            JFrame updateFrame = new EditWindow(department, frame, authority);
         });
         frame.add(UpdateButton);
 
@@ -139,23 +140,19 @@ public class ManageEmployees {
                 fileNotFoundException.printStackTrace();
             }
         });
-        frame.add(backToMenu);
+        if (authority.equalsIgnoreCase("HR"))
+            frame.add(backToMenu);
 
 
         printEmployeeCard = new JButton("Print Card");
         printEmployeeCard.setSize(100, 30);
         printEmployeeCard.setLocation(650, 370);
-        printEmployeeCard.addActionListener(new ActionListener() {
+        printEmployeeCard.addActionListener(e -> {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if(table.getSelectedRow()!=-1){
-                    new PassCard(table, tabelmodel);
-                } else {
-                    JOptionPane.showMessageDialog(frame,"OBS! Please select a row to print the card");
-                }
-
+            if(table.getSelectedRow()!=-1){
+                new PassCard(table, tabelmodel, employeeList);
+            } else {
+                JOptionPane.showMessageDialog(frame,"OBS! Please select a row to print the card");
             }
 
         });
@@ -236,7 +233,7 @@ public class ManageEmployees {
     }
 
 
-    public class EditWindow extends JFrame {
+    /*public class EditWindow extends JFrame {
         public EditWindow(String department) throws HeadlessException {
 
             JLabel addName = new JLabel("Name");
@@ -247,6 +244,7 @@ public class ManageEmployees {
             JLabel addSalary = new JLabel("Salary");
             JLabel addDepartment = new JLabel("Department");
             JLabel addRole = new JLabel("Role");
+            JLabel addID = new JLabel("userID");
 
             JButton buttonSave, buttonCancel;
 
@@ -258,17 +256,20 @@ public class ManageEmployees {
             addSalary.setSize(80, 30);
             addDepartment.setSize(80, 30);
             addRole.setSize(80, 30);
-            addName.setLocation(10, 40);
-            addSurName.setLocation(10, 80);
-            addGender.setLocation(10, 120);
-            addBirthDate.setLocation(10, 160);
-            addTelNo.setLocation(10, 200);
-            addSalary.setLocation(10, 240);
-            addDepartment.setLocation(10, 280);
-            addRole.setLocation(10, 320);
+            addID.setBounds(10,340, 80,30);
+            addName.setLocation(10, 20);
+            addSurName.setLocation(10, 60);
+            addGender.setLocation(10, 100);
+            addBirthDate.setLocation(10, 140);
+            addTelNo.setLocation(10, 180);
+            addSalary.setLocation(10, 220);
+            addDepartment.setLocation(10, 260);
+            addRole.setLocation(10, 300);
 
             JTextField namnField = new JTextField(50);
+
             JTextField surNameField = new JTextField(50);
+            JTextField userIDField = new JTextField();
             JComboBox<String> genderField = new JComboBox<>();
             genderField.addItem("Male");
             genderField.addItem("Female");
@@ -283,6 +284,16 @@ public class ManageEmployees {
             JComboBox<String> roleField= new JComboBox<>();
             roleField.addItem("Doctor");
             roleField.addItem("Nurse");
+            userIDField.setEditable(false);
+
+            namnField.addActionListener(e1 -> {
+                String namn = namnField.getText();
+                String iD = e.generateID(namn);
+
+                System.out.println(iD);
+                userIDField.setText(iD);
+            });
+
 
             namnField.setSize(200, 30);
             surNameField.setSize(200, 30);
@@ -292,14 +303,15 @@ public class ManageEmployees {
             salaryField.setSize(200, 30);
             departmentField.setSize(200, 30);
             roleField.setSize(200, 30);
-            namnField.setLocation(80, 50);
-            surNameField.setLocation(80, 90);
-            genderField.setLocation(80, 130);
-            birthDateField.setLocation(80, 170);
-            telNoField.setLocation(80, 210);
-            salaryField.setLocation(80, 250);
-            departmentField.setLocation(80, 290);
-            roleField.setLocation(80, 330);
+            namnField.setLocation(80, 20);
+            surNameField.setLocation(80, 60);
+            genderField.setLocation(80, 100);
+            birthDateField.setLocation(80, 140);
+            telNoField.setLocation(80, 180);
+            salaryField.setLocation(80, 220);
+            departmentField.setLocation(80, 260);
+            roleField.setLocation(80, 300);
+            userIDField.setBounds(80, 340, 200, 30);
             //getContentPane().setBackground(new Color(136, 0, 255));
             setLayout(null);
             setSize(350, 500);
@@ -312,6 +324,7 @@ public class ManageEmployees {
             add(addSalary);
             add(addDepartment);
             add(addRole);
+            add(addID);
             add(namnField);
             add(surNameField);
             add(genderField);
@@ -320,6 +333,7 @@ public class ManageEmployees {
             add(salaryField);
             add(departmentField);
             add(roleField);
+            add(userIDField);
 
             setVisible(true);
             buttonSave = new JButton("Save");
@@ -340,7 +354,7 @@ public class ManageEmployees {
                     try {
                         saveButton(namnField.getText(), surNameField.getText(), genderField.getSelectedItem().toString(),
                                 birthDateField.getText(), telNoField.getText(),
-                                salaryField.getText(), departmentField.getSelectedItem().toString(), roleField.getSelectedItem().toString());
+                                salaryField.getText(), departmentField.getSelectedItem().toString(), roleField.getSelectedItem().toString(), userIDField.getText());
                     } catch (IOException fileNotFoundException) {
                         fileNotFoundException.printStackTrace();
                     }
@@ -364,9 +378,12 @@ public class ManageEmployees {
          * @param roleFieldText
          * @return
          */
-        public Employee saveButton(String nameFieldText, String surNameFieldText, String genderFieldText, String birthDateFieldText, String telNoFieldText, String salaryFieldText, String departmentFieldText, String roleFieldText) throws IOException {
 
-            Employee addedEmployee = new Employee(nameFieldText, surNameFieldText,genderFieldText ,birthDateFieldText, departmentFieldText, telNoFieldText ,Double.parseDouble(salaryFieldText), roleFieldText);
+
+   /* public Employee saveButton(String nameFieldText, String surNameFieldText, String genderFieldText, String birthDateFieldText, String telNoFieldText, String salaryFieldText, String departmentFieldText, String roleFieldText, String userID) throws IOException {
+
+
+            Employee addedEmployee = new Employee(nameFieldText, surNameFieldText,genderFieldText ,birthDateFieldText, departmentFieldText, telNoFieldText ,Double.parseDouble(salaryFieldText), roleFieldText, userID);
 
             DAO dao = new DAO();
 
@@ -383,7 +400,7 @@ public class ManageEmployees {
          * @param dao
          * @param department
          */
-        public void updateEmployeeWindow(Employee addedEmployee, DAO dao, String department) throws IOException {
+   /*     public void updateEmployeeWindow(Employee addedEmployee, DAO dao, String department) throws IOException {
 
             String info = "";
 
@@ -394,25 +411,25 @@ public class ManageEmployees {
                     dao.cardiologyList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(cardiologyFile, info);
-                    new ManageEmployees(dao.cardiologyList,cardiologyFile, department);
+                    new ManageEmployees(dao.cardiologyList,cardiologyFile, department, authority);
                 }
                 case anaesthetics -> {
                     dao.anaestheticsList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(anaestheticsFile, info);
-                    new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department);
+                    new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department, authority);
                 }
                 case surgery -> {
                     dao.surgeryList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(surgeryFile, info);
-                    new ManageEmployees(dao.surgeryList,surgeryFile, department);
+                    new ManageEmployees(dao.surgeryList,surgeryFile, department, authority);
                 }
                 case criticalCare -> {
                     dao.criticalCareList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(criticalCareFile, info);
-                    new ManageEmployees(dao.criticalCareList,criticalCareFile, department);
+                    new ManageEmployees(dao.criticalCareList,criticalCareFile, department, authority);
                 }
             }
 
@@ -421,6 +438,7 @@ public class ManageEmployees {
             frame.revalidate();
             frame.repaint();
         }
+
 
         private void addEmployeeToTextFile(String filePath, String EmployeeInfo) throws IOException {
             writer = new FileWriter(filePath, true);
@@ -451,6 +469,9 @@ public class ManageEmployees {
 
 
     }
+
+    */
+
     public void RemoveEmployee(List<Employee> list, String filePath, String department) throws IOException {
         String tempDep = "";
         // Depending on the chosen department for the employee, he/she will be removed from said department list.
@@ -458,12 +479,12 @@ public class ManageEmployees {
         File newFile = new File(filePath);
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         BufferedWriter writer2 = new BufferedWriter(new FileWriter(tempFile));
-        String name = JOptionPane.showInputDialog("Vad heter den anställda du vill ta bort eller flytta?");
+        String name = JOptionPane.showInputDialog("userID på den anställda du vill ta bort eller flytta?");
         String employeeInfo = "";
 
         for (Employee e:list
         ) {
-            if (e.getFirstName().equalsIgnoreCase(name)) {
+            if (e.getUserID().equalsIgnoreCase(name)) {
                 System.out.println("Test hittades!");
                 employeeInfo = e.writeInfo();
             }
@@ -519,16 +540,16 @@ public class ManageEmployees {
 
         switch (department) {
             case cardiology -> {
-                new ManageEmployees(dao.cardiologyList,cardiologyFile, department);
+                new ManageEmployees(dao.cardiologyList,cardiologyFile, department,authority);
             }
             case anaesthetics -> {
-                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department);
+                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department,authority);
             }
             case surgery -> {
-                new ManageEmployees(dao.surgeryList,surgeryFile, department);
+                new ManageEmployees(dao.surgeryList,surgeryFile, department,authority);
             }
             case criticalCare -> {
-                new ManageEmployees(dao.criticalCareList,criticalCareFile, department);
+                new ManageEmployees(dao.criticalCareList,criticalCareFile, department,authority);
             }
         }
 

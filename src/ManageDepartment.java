@@ -112,7 +112,7 @@ public class ManageDepartment extends JFrame implements ActionListener {
         if (e.getSource() == searchDepartment) {
 
             dispose();
-            ManageEmployees m = new ManageEmployees(findDepartmentList(), findFilePath(), listOfDepartments.getSelectedItem().toString());
+            ManageEmployees m = new ManageEmployees(findDepartmentList(), findFilePath(), listOfDepartments.getSelectedItem().toString(), "HR");
 
             }
         }

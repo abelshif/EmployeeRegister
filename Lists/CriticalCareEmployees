@@ -1,9 +1,6 @@
-Axel,Jeansson,Male,19940415,Critical Care,0707665321,80000.0,Doctor
-Lina,Måne,Female,19850423,Critical Care,0763232221,36550.0,Doctor
-Nora,Lihao,Female,19950910,Critical Care,0704449910,26000.0,Nurse
-Stina,Länsbo,Female,19651202,Critical Care,0731233212,29300.0,Nurse
-Nur,Zavala,Female,19800707,Critical Care,070868543,27000.0,Nurse
-Agnes,Dunlop,Female,19770612,Critical Care,0765543234,28000.0,Nurse
-Mohammed,Delaney,Male,19860203,Critical Care,0701208981,26700.0,Nurse
-Karin,Dalen,Female,19830523,Critical Care,0737856939,27100.0,Nurse
-Dude,Dudett,Male,930321,Critical care,070534343,2332.0,Doctor
+Abel,Shiferaw,Male,19940415,Critical Care,0707665321,80000.0,Doctor,ABEL_347
+Sileshi,Haile,Male,19850423,Critical Care,0763232221,56850.0,Doctor,SILESHI_890
+Kristina,Duvemåla,Female,19690826,Critical Care,0702385549,30230,Nurse,KRISTINA_002
+Nur,Zavala,Female,19800707,Critical Care,070868543,27000.0,Nurse,NUR_454
+Karin,Trondhaim,Female,19530523,Critical Care,0737856939,31100.0,Nurse,KARIN_802
+Dude,Dudett,Male,930321,Critical Care,070534343,52332.0,Doctor,DUDE_772

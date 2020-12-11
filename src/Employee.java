@@ -17,8 +17,10 @@ public class Employee implements GenerateID, PrintInfo {
     private String phoneNumber;
     private String role;
     private String info;
+    private String userID;
 
 
+    public Employee(){};
 
     public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization){
         this.firstName = firstName;
@@ -30,6 +32,19 @@ public class Employee implements GenerateID, PrintInfo {
         this.salary = salary;
         this.role = specialization;
     }
+
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization, String userID){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.department = department;
+        this.phoneNumber = phoneNumber;
+        this.salary = salary;
+        this.role = specialization;
+        this.userID = userID;
+    }
+
 
 
 
@@ -84,6 +99,13 @@ public class Employee implements GenerateID, PrintInfo {
         return role;
     }
 
+    public void setUserID(String userID){
+        this.userID = this.userID;
+    }
+    public String getUserID(){
+        return userID;
+    }
+
 
     @Override
     public void printEmployeeInfo() {
@@ -97,16 +119,16 @@ public class Employee implements GenerateID, PrintInfo {
     }
 
     public String writeInfo(){
-        info = getFirstName()+","+getLastName()+","+getGender()+","+getBirthDate()+","+getDepartment()+","+getPhoneNumber()+","+getSalary()+","+ getRole();
+        info = getFirstName()+","+getLastName()+","+getGender()+","+getBirthDate()+","+getDepartment()+","+getPhoneNumber()+","+getSalary()+","+ getRole()+","+getUserID();
         return info;
     }
 
     @Override
-    public String generateID() {
+    public String generateID(String firstName) {
 
         Random rand = new Random();
         int random = 100 + rand.nextInt(899);
-        return getFirstName() + "_" + random;
+        return firstName.toUpperCase() + "_" + random;
 
     }
 }

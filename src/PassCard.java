@@ -1,15 +1,26 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class PassCard extends JFrame {
 
-    public PassCard(JTable table, DefaultTableModel tabelmodel) {
+    public PassCard(JTable table, DefaultTableModel tabelmodel, List<Employee> list) {
         super("Employee Id Card");
+
+        String name =tabelmodel.getValueAt(table.getSelectedRow(),0).toString();
+        String lastName = tabelmodel.getValueAt(table.getSelectedRow(),1).toString();
+        String userID = "";
+
+        for (Employee e:list
+             ) {
+            if (e.getFirstName().equalsIgnoreCase(name) && e.getLastName().equalsIgnoreCase(lastName)){
+                userID = e.getUserID();
+            }
+        }
 
         setLayout(null);
         JPanel employeePanel=new JPanel();
@@ -38,6 +49,8 @@ public class PassCard extends JFrame {
         JLabel department= new JLabel(tabelmodel.getValueAt(table.getSelectedRow(), 6).toString());
         JLabel roleLabel= new JLabel("Gender");
         JLabel role= new JLabel(tabelmodel.getValueAt(table.getSelectedRow(), 7).toString());
+        JLabel userIDLabel = new JLabel("User ID");
+        JLabel showUserID = new JLabel(userID);
         employeeNameLabel.setBounds(150,10, 150, 50);
         employeeName.setBounds(230,10, 150, 50);
         employeePanel.add(employeeNameLabel);
@@ -59,6 +72,9 @@ public class PassCard extends JFrame {
         employeePanel.add(role);
         roleLabel.setBounds(150,90, 100, 50);
         role.setBounds(230,90, 100, 50);
+        userIDLabel.setBounds(150,110,100,50);
+        showUserID.setBounds(230, 110, 100, 50);
+        employeePanel.add(userIDLabel); employeePanel.add(showUserID);
 
         employeePanel.setBorder(BorderFactory.createEtchedBorder());
         employeePanel.setBounds(10,10, 380, 190);
