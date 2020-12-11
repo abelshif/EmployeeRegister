@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
@@ -19,19 +21,18 @@ public class ManageEmployees {
     private JScrollPane scrollPane;
     private DefaultTableModel tabelmodel;
     private String[] departments = {"Kardiologi", "Kirurgi", "Akuten", "Anestesi"};
-    private String cardiologyFile = "Lists\\CardiologyEmployees";
-    private String surgeryFile = "Lists\\SurgeryEmployees";
-    private String criticalCareFile = "Lists\\CriticalCareEmployees";
-    private String anaestheticsFile = "Lists\\AnaestheticsEmployees";
+    public static final String cardiologyFile = "Lists\\CardiologyEmployees";
+    public static final String surgeryFile = "Lists\\SurgeryEmployees";
+    public static final String criticalCareFile = "Lists\\CriticalCareEmployees";
+    public static final String anaestheticsFile = "Lists\\AnaestheticsEmployees";
     FileWriter writer;
     Scanner s;
 
-    final String cardiology = "Cardiology";
-    final String anaesthetics = "Anaesthetics";
-    final String surgery = "Surgery";
-    final String criticalCare = "Critical care";
+    public static final String cardiology = "Cardiology";
+    public static final String anaesthetics = "Anaesthetics";
+    public static final String surgery = "Surgery";
+    public static final String criticalCare = "Critical care";
     private String authority;
-
 
 
     /**
@@ -101,7 +102,7 @@ public class ManageEmployees {
         addEmployeeButton.setSize(100, 30);
         addEmployeeButton.setLocation(50, 370);
         addEmployeeButton.addActionListener(e -> {
-            JFrame addFrame = new EditWindow(department);
+            JFrame addFrame = new EditWindow(department, frame);
         });
 
 
@@ -125,7 +126,7 @@ public class ManageEmployees {
         UpdateButton.setSize(100, 30);
         UpdateButton.setLocation(450, 370);
         UpdateButton.addActionListener(e -> {
-            JFrame updateFrame = new EditWindow(department);
+            JFrame updateFrame = new EditWindow(department, frame);
         });
         frame.add(UpdateButton);
 
@@ -232,7 +233,7 @@ public class ManageEmployees {
     }
 
 
-    public class EditWindow extends JFrame {
+   /* public class EditWindow extends JFrame {
         public EditWindow(String department) throws HeadlessException {
 
             JLabel addName = new JLabel("Name");
@@ -346,6 +347,8 @@ public class ManageEmployees {
             });
         }
 
+
+
         /**
          * This method adds Employees to the DAO List<Employee>, Depending on the chosen department.
          * TODO: Get the output connected to the textfile.
@@ -360,7 +363,8 @@ public class ManageEmployees {
          * @param roleFieldText
          * @return
          */
-        public Employee saveButton(String nameFieldText, String surNameFieldText, String genderFieldText, String birthDateFieldText, String telNoFieldText, String salaryFieldText, String departmentFieldText, String roleFieldText) throws IOException {
+/*
+    public Employee saveButton(String nameFieldText, String surNameFieldText, String genderFieldText, String birthDateFieldText, String telNoFieldText, String salaryFieldText, String departmentFieldText, String roleFieldText) throws IOException {
 
             Employee addedEmployee = new Employee(nameFieldText, surNameFieldText,genderFieldText ,birthDateFieldText, departmentFieldText, telNoFieldText ,Double.parseDouble(salaryFieldText), roleFieldText);
 
@@ -379,7 +383,7 @@ public class ManageEmployees {
          * @param dao
          * @param department
          */
-        public void updateEmployeeWindow(Employee addedEmployee, DAO dao, String department) throws IOException {
+   /*     public void updateEmployeeWindow(Employee addedEmployee, DAO dao, String department) throws IOException {
 
             String info = "";
 
@@ -418,6 +422,7 @@ public class ManageEmployees {
             frame.repaint();
         }
 
+
         private void addEmployeeToTextFile(String filePath, String EmployeeInfo) throws IOException {
             writer = new FileWriter(filePath, true);
             s = new Scanner(new FileReader(filePath));
@@ -447,6 +452,9 @@ public class ManageEmployees {
 
 
     }
+
+    */
+
     public void RemoveEmployee(List<Employee> list, String filePath, String department) throws IOException {
         String tempDep = "";
         // Depending on the chosen department for the employee, he/she will be removed from said department list.
