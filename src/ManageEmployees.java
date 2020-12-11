@@ -233,6 +233,7 @@ public class ManageEmployees {
 
 
     public class EditWindow extends JFrame {
+        Employee e = new Employee();
         public EditWindow(String department) throws HeadlessException {
 
             JLabel addName = new JLabel("Name");
@@ -243,6 +244,7 @@ public class ManageEmployees {
             JLabel addSalary = new JLabel("Salary");
             JLabel addDepartment = new JLabel("Department");
             JLabel addRole = new JLabel("Role");
+            JLabel addID = new JLabel("userID");
 
             JButton buttonSave, buttonCancel;
 
@@ -254,17 +256,20 @@ public class ManageEmployees {
             addSalary.setSize(80, 30);
             addDepartment.setSize(80, 30);
             addRole.setSize(80, 30);
-            addName.setLocation(10, 40);
-            addSurName.setLocation(10, 80);
-            addGender.setLocation(10, 120);
-            addBirthDate.setLocation(10, 160);
-            addTelNo.setLocation(10, 200);
-            addSalary.setLocation(10, 240);
-            addDepartment.setLocation(10, 280);
-            addRole.setLocation(10, 320);
+            addID.setBounds(10,340, 80,30);
+            addName.setLocation(10, 20);
+            addSurName.setLocation(10, 60);
+            addGender.setLocation(10, 100);
+            addBirthDate.setLocation(10, 140);
+            addTelNo.setLocation(10, 180);
+            addSalary.setLocation(10, 220);
+            addDepartment.setLocation(10, 260);
+            addRole.setLocation(10, 300);
 
             JTextField namnField = new JTextField(50);
+            String iD = e.generateID(namnField.getText());
             JTextField surNameField = new JTextField(50);
+            JTextField userIDField = new JTextField();
             JComboBox<String> genderField = new JComboBox<>();
             genderField.addItem("Male");
             genderField.addItem("Female");
@@ -279,6 +284,9 @@ public class ManageEmployees {
             JComboBox<String> roleField= new JComboBox<>();
             roleField.addItem("Doctor");
             roleField.addItem("Nurse");
+            userIDField.setText(iD);
+            userIDField.setEditable(false);
+
 
             namnField.setSize(200, 30);
             surNameField.setSize(200, 30);
@@ -288,14 +296,15 @@ public class ManageEmployees {
             salaryField.setSize(200, 30);
             departmentField.setSize(200, 30);
             roleField.setSize(200, 30);
-            namnField.setLocation(80, 50);
-            surNameField.setLocation(80, 90);
-            genderField.setLocation(80, 130);
-            birthDateField.setLocation(80, 170);
-            telNoField.setLocation(80, 210);
-            salaryField.setLocation(80, 250);
-            departmentField.setLocation(80, 290);
-            roleField.setLocation(80, 330);
+            namnField.setLocation(80, 20);
+            surNameField.setLocation(80, 60);
+            genderField.setLocation(80, 100);
+            birthDateField.setLocation(80, 140);
+            telNoField.setLocation(80, 180);
+            salaryField.setLocation(80, 220);
+            departmentField.setLocation(80, 260);
+            roleField.setLocation(80, 300);
+            userIDField.setBounds(80, 340, 200, 30);
             //getContentPane().setBackground(new Color(136, 0, 255));
             setLayout(null);
             setSize(350, 500);
@@ -308,6 +317,7 @@ public class ManageEmployees {
             add(addSalary);
             add(addDepartment);
             add(addRole);
+            add(addID);
             add(namnField);
             add(surNameField);
             add(genderField);
@@ -316,6 +326,7 @@ public class ManageEmployees {
             add(salaryField);
             add(departmentField);
             add(roleField);
+            add(userIDField);
 
             setVisible(true);
             buttonSave = new JButton("Save");
