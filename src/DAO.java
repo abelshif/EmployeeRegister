@@ -28,10 +28,10 @@ public class DAO {
     private String specialization;
     private String userID;
 
-    private String cardiologyFile = "Lists\\CardiologyEmployees";
-    private String surgeryFile = "Lists\\SurgeryEmployees";
-    private String criticalCareFile = "Lists\\CriticalCareEmployees";
-    private String anaestheticsFile = "Lists\\AnaestheticsEmployees";
+    private String cardiologyFile = "Lists/CardiologyEmployees";
+    private String surgeryFile = "Lists/SurgeryEmployees";
+    private String criticalCareFile = "Lists/CriticalCareEmployees";
+    private String anaestheticsFile = "Lists/AnaestheticsEmployees";
 
 
     public List<Employee>  surgeryList = new ArrayList<>();
