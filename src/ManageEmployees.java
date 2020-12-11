@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
@@ -32,6 +30,7 @@ public class ManageEmployees {
     final String anaesthetics = "Anaesthetics";
     final String surgery = "Surgery";
     final String criticalCare = "Critical care";
+    private String authority;
 
 
 
@@ -78,7 +77,8 @@ public class ManageEmployees {
         return null;
     }
 
-    public ManageEmployees(List<Employee> employeeList, String filePath, String department) {
+    public ManageEmployees(List<Employee> employeeList, String filePath, String department,String authority) {
+        this.authority = authority;
 
         Object[][] convertedList = convertListTo2DObjectArray(employeeList);
         System.out.println("Listans storlek: " + employeeList.size());
@@ -139,7 +139,8 @@ public class ManageEmployees {
                 fileNotFoundException.printStackTrace();
             }
         });
-        frame.add(backToMenu);
+        if (authority.equalsIgnoreCase("HR"))
+            frame.add(backToMenu);
 
 
         printEmployeeCard = new JButton("Print Card");
@@ -389,25 +390,25 @@ public class ManageEmployees {
                     dao.cardiologyList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(cardiologyFile, info);
-                    new ManageEmployees(dao.cardiologyList,cardiologyFile, department);
+                    new ManageEmployees(dao.cardiologyList,cardiologyFile, department, authority);
                 }
                 case anaesthetics -> {
                     dao.anaestheticsList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(anaestheticsFile, info);
-                    new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department);
+                    new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department, authority);
                 }
                 case surgery -> {
                     dao.surgeryList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(surgeryFile, info);
-                    new ManageEmployees(dao.surgeryList,surgeryFile, department);
+                    new ManageEmployees(dao.surgeryList,surgeryFile, department, authority);
                 }
                 case criticalCare -> {
                     dao.criticalCareList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
                     addEmployeeToTextFile(criticalCareFile, info);
-                    new ManageEmployees(dao.criticalCareList,criticalCareFile, department);
+                    new ManageEmployees(dao.criticalCareList,criticalCareFile, department, authority);
                 }
             }
 
@@ -514,16 +515,16 @@ public class ManageEmployees {
 
         switch (department) {
             case cardiology -> {
-                new ManageEmployees(dao.cardiologyList,cardiologyFile, department);
+                new ManageEmployees(dao.cardiologyList,cardiologyFile, department,authority);
             }
             case anaesthetics -> {
-                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department);
+                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department,authority);
             }
             case surgery -> {
-                new ManageEmployees(dao.surgeryList,surgeryFile, department);
+                new ManageEmployees(dao.surgeryList,surgeryFile, department,authority);
             }
             case criticalCare -> {
-                new ManageEmployees(dao.criticalCareList,criticalCareFile, department);
+                new ManageEmployees(dao.criticalCareList,criticalCareFile, department,authority);
             }
         }
 
