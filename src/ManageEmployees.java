@@ -267,7 +267,7 @@ public class ManageEmployees {
             addRole.setLocation(10, 300);
 
             JTextField namnField = new JTextField(50);
-            String iD = e.generateID(namnField.getText());
+
             JTextField surNameField = new JTextField(50);
             JTextField userIDField = new JTextField();
             JComboBox<String> genderField = new JComboBox<>();
@@ -284,8 +284,15 @@ public class ManageEmployees {
             JComboBox<String> roleField= new JComboBox<>();
             roleField.addItem("Doctor");
             roleField.addItem("Nurse");
-            userIDField.setText(iD);
             userIDField.setEditable(false);
+
+            namnField.addActionListener(e1 -> {
+                String namn = namnField.getText();
+                String iD = e.generateID(namn);
+
+                System.out.println(iD);
+                userIDField.setText(iD);
+            });
 
 
             namnField.setSize(200, 30);
@@ -347,7 +354,7 @@ public class ManageEmployees {
                     try {
                         saveButton(namnField.getText(), surNameField.getText(), genderField.getSelectedItem().toString(),
                                 birthDateField.getText(), telNoField.getText(),
-                                salaryField.getText(), departmentField.getSelectedItem().toString(), roleField.getSelectedItem().toString());
+                                salaryField.getText(), departmentField.getSelectedItem().toString(), roleField.getSelectedItem().toString(), userIDField.getText());
                     } catch (IOException fileNotFoundException) {
                         fileNotFoundException.printStackTrace();
                     }
@@ -355,6 +362,10 @@ public class ManageEmployees {
 
                 }
             });
+        }
+
+        private void printID(String name){
+
         }
 
         /**
@@ -371,9 +382,9 @@ public class ManageEmployees {
          * @param roleFieldText
          * @return
          */
-        public Employee saveButton(String nameFieldText, String surNameFieldText, String genderFieldText, String birthDateFieldText, String telNoFieldText, String salaryFieldText, String departmentFieldText, String roleFieldText) throws IOException {
+        public Employee saveButton(String nameFieldText, String surNameFieldText, String genderFieldText, String birthDateFieldText, String telNoFieldText, String salaryFieldText, String departmentFieldText, String roleFieldText, String userID) throws IOException {
 
-            Employee addedEmployee = new Employee(nameFieldText, surNameFieldText,genderFieldText ,birthDateFieldText, departmentFieldText, telNoFieldText ,Double.parseDouble(salaryFieldText), roleFieldText);
+            Employee addedEmployee = new Employee(nameFieldText, surNameFieldText,genderFieldText ,birthDateFieldText, departmentFieldText, telNoFieldText ,Double.parseDouble(salaryFieldText), roleFieldText, userID);
 
             DAO dao = new DAO();
 
