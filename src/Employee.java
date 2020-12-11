@@ -20,6 +20,7 @@ public class Employee implements GenerateID, PrintInfo {
     private String userID;
 
 
+    public Employee(){};
 
     public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization){
         this.firstName = firstName;
@@ -123,11 +124,11 @@ public class Employee implements GenerateID, PrintInfo {
     }
 
     @Override
-    public String generateID() {
+    public String generateID(String firstName) {
 
         Random rand = new Random();
         int random = 100 + rand.nextInt(899);
-        return getFirstName().toUpperCase() + "_" + random;
+        return firstName.toUpperCase() + "_" + random;
 
     }
 }

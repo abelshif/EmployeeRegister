@@ -6,5 +6,5 @@
  * Copyright: MIT
  */
 public interface GenerateID {
-    String generateID();
+    String generateID(String firstName);
 }

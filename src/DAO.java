@@ -97,7 +97,6 @@ public class DAO {
         }
         for (Employee e:list
              ) {
-            e.printEmployeeInfo();
             System.out.println(e.getUserID());
         }
     }
