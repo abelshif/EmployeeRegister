@@ -1,8 +1,7 @@
-Axel,Jeansson,Male,19940415,Surgery,0707665321,80000.0,Doctor
-Lina,Måne,Female,19850423,Surgery,0763232221,36550.0,Doctor
-Nora,Lihao,Female,19950910,Surgery,0704449910,26000.0,Nurse
-Stina,Länsbo,Female,19651202,Surgery,0731233212,29300.0,Nurse
-Agnes,Dunlop,Female,19770612,Surgery,0765543234,28000.0,Nurse
-Mohammed,Delaney,Male,19860203,Surgery,0701208981,26700.0,Nurse
-Karin,Dahlen,Female,19830523,Surgery,0737856983,27100.0,Nurse
-Meron,Link,Male,19904879,Surgery,07048858,50000.0,Doctor
+Axel,Jeansson,Male,19940415,Surgery,0707665321,8000000.0,Doctor,AXEL_762
+Lina,Måne,Female,19850423,Surgery,0763232221,36550.0,Doctor,LINA_092
+Nora,Lihao,Female,19950910,Surgery,0704449910,26000.0,Nurse,NORA_874
+Stina,Länsbo,Female,19651202,Surgery,0731233212,29300.0,Nurse,STINA_412
+Agnes,Dunlop,Female,19770612,Surgery,0765543234,28000.0,Nurse,AGNES_662
+Mohammed,Delaney,Male,19860203,Surgery,0701208981,26700.0,Nurse,MOHAMMED_901
+Karin,Dahlen,Female,19830523,Surgery,0737856983,27100.0,Nurse,KARIN_298

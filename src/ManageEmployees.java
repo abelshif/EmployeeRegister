@@ -145,17 +145,12 @@ public class ManageEmployees {
         printEmployeeCard = new JButton("Print Card");
         printEmployeeCard.setSize(100, 30);
         printEmployeeCard.setLocation(650, 370);
-        printEmployeeCard.addActionListener(new ActionListener() {
+        printEmployeeCard.addActionListener(e -> {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if(table.getSelectedRow()!=-1){
-                    new PassCard(table, tabelmodel);
-                } else {
-                    JOptionPane.showMessageDialog(frame,"OBS! Please select a row to print the card");
-                }
-
+            if(table.getSelectedRow()!=-1){
+                new PassCard(table, tabelmodel, employeeList);
+            } else {
+                JOptionPane.showMessageDialog(frame,"OBS! Please select a row to print the card");
             }
 
         });
@@ -458,12 +453,12 @@ public class ManageEmployees {
         File newFile = new File(filePath);
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         BufferedWriter writer2 = new BufferedWriter(new FileWriter(tempFile));
-        String name = JOptionPane.showInputDialog("Vad heter den anställda du vill ta bort eller flytta?");
+        String name = JOptionPane.showInputDialog("userID på den anställda du vill ta bort eller flytta?");
         String employeeInfo = "";
 
         for (Employee e:list
         ) {
-            if (e.getFirstName().equalsIgnoreCase(name)) {
+            if (e.getUserID().equalsIgnoreCase(name)) {
                 System.out.println("Test hittades!");
                 employeeInfo = e.writeInfo();
             }

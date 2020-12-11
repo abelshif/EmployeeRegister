@@ -15,9 +15,7 @@ import java.util.Scanner;
  */
 public class DAO {
 
-    private String filePath;
     private Scanner s;
-    private FileWriter writer;
     private String data;
 
     private String firstName;
@@ -28,6 +26,7 @@ public class DAO {
     private String department;
     private String phoneNumber;
     private String specialization;
+    private String userID;
 
     private String cardiologyFile = "Lists\\CardiologyEmployees";
     private String surgeryFile = "Lists\\SurgeryEmployees";
@@ -86,8 +85,9 @@ public class DAO {
                     phoneNumber = temp[5];
                     salary = Double.parseDouble(temp[6]);
                     specialization = temp[7];
+                    userID = temp[8];
 
-                    list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization));
+                    list.add(new Employee(firstName, lastName, gender, birthDate, department, phoneNumber, salary, specialization, userID));
 
             }
             s.close();
@@ -98,6 +98,7 @@ public class DAO {
         for (Employee e:list
              ) {
             e.printEmployeeInfo();
+            System.out.println(e.getUserID());
         }
     }
 

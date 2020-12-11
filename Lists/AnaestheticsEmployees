@@ -1,5 +1,6 @@
-Meron,Lindkvist,Female,19761130,Anaesthetics,0708946332,51000,Doctor
-Måns,Andersson,Male,19691212,Anaesthetics,0704532111,59000,Doctor
-Hanna,Ibrahimovic,Female,19890312,Anaesthetics,0765434444,23000,Nurse
-Rahima,Mustafa,Female,19780831,Anaesthetics,0707722666,26700,Nurse
-Camilla,Stjärna,Female,19811010,Anaesthetics,0704310922,24700,Nurse
+Meron,Lindkvist,Female,19761130,Anaesthetics,0708946332,51000,Doctor,MERON_555
+Måns,Andersson,Male,19691212,Anaesthetics,0704532111,59000,Doctor,MÅNS_103
+Hanna,Ibrahimovic,Female,19890312,Anaesthetics,0765434444,23000,Nurse,HANNA_329
+Rahima,Mustafa,Female,19780831,Anaesthetics,0707722666,26700,Nurse,RAHIMA_591
+Camilla,Stjärna,Female,19811010,Anaesthetics,0704310922,24700,Nurse,CAMILLA_829
+Meron,Link,Male,19904879,Anaesthetics,0704885834,50000.0,Doctor,MERON_022
