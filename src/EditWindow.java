@@ -8,8 +8,10 @@ import java.util.Scanner;
 
 public class EditWindow extends JFrame{
 
-        public EditWindow(String department) throws HeadlessException {
+        private JFrame manageEmployeeFrame;
 
+        public EditWindow(String department, JFrame manageEmployeeFrame) throws HeadlessException {
+            this.manageEmployeeFrame = manageEmployeeFrame;
             JLabel addName = new JLabel("Name");
             JLabel addSurName = new JLabel("Surname");
             JLabel addGender = new JLabel("Gender");
@@ -187,9 +189,9 @@ public class EditWindow extends JFrame{
             }
 
 
-            dispose();
-            revalidate();
-            repaint();
+            manageEmployeeFrame.dispose();
+            manageEmployeeFrame.revalidate();
+            manageEmployeeFrame.repaint();
         }
 
         private void addEmployeeToTextFile(String filePath, String EmployeeInfo) throws IOException {

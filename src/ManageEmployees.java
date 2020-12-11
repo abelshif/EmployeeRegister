@@ -101,7 +101,7 @@ public class ManageEmployees {
         addEmployeeButton.setSize(100, 30);
         addEmployeeButton.setLocation(50, 370);
         addEmployeeButton.addActionListener(e -> {
-            JFrame addFrame = new EditWindow(department);
+            JFrame addFrame = new EditWindow(department, frame);
         });
 
 
@@ -125,7 +125,7 @@ public class ManageEmployees {
         UpdateButton.setSize(100, 30);
         UpdateButton.setLocation(450, 370);
         UpdateButton.addActionListener(e -> {
-            JFrame updateFrame = new EditWindow(department);
+            JFrame updateFrame = new EditWindow(department, frame);
         });
         frame.add(UpdateButton);
 
