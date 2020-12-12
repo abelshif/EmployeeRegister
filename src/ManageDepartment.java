@@ -98,15 +98,6 @@ public class ManageDepartment extends JFrame implements ActionListener {
         return null;
     }
 
-
-    public static void main(String[] args) throws FileNotFoundException {
-
-        new ManageDepartment();
-    }
-
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == searchDepartment) {
