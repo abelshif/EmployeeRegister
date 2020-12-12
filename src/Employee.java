@@ -20,9 +20,12 @@ public class Employee implements GenerateID {
     private String userID;
 
 
-    public Employee(){};
+    public Employee() {
+    }
 
-    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization){
+    ;
+
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -33,7 +36,7 @@ public class Employee implements GenerateID {
         this.role = specialization;
     }
 
-    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization, String userID){
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization, String userID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -45,13 +48,9 @@ public class Employee implements GenerateID {
         this.userID = userID;
     }
 
-
-
-
     public String getFirstName() {
         return firstName;
     }
-
 
     public String getLastName() {
         return lastName;
@@ -65,11 +64,9 @@ public class Employee implements GenerateID {
         return gender;
     }
 
-
     public String getBirthDate() {
         return birthDate;
     }
-
 
     public double getSalary() {
         return salary;
@@ -99,17 +96,17 @@ public class Employee implements GenerateID {
         return role;
     }
 
-    public void setUserID(String userID){
+    public void setUserID(String userID) {
         this.userID = this.userID;
     }
-    public String getUserID(){
+
+    public String getUserID() {
         return userID;
     }
 
 
-
-    public String writeInfo(){
-        info = getFirstName()+","+getLastName()+","+getGender()+","+getBirthDate()+","+getDepartment()+","+getPhoneNumber()+","+getSalary()+","+ getRole()+","+getUserID();
+    public String writeInfo() {
+        info = getFirstName() + "," + getLastName() + "," + getGender() + "," + getBirthDate() + "," + getDepartment() + "," + getPhoneNumber() + "," + getSalary() + "," + getRole() + "," + getUserID();
         return info;
     }
 
