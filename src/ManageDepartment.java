@@ -103,10 +103,7 @@ public class ManageDepartment extends JFrame implements ActionListener {
 
         new ManageDepartment();
     }
-
-
-
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == searchDepartment) {
