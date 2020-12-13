@@ -12,7 +12,7 @@ public class Employee implements GenerateID {
     private String lastName;
     private String gender;
     private String birthDate;
-    private double salary;
+    private String salary;
     private String department;
     private String phoneNumber;
     private String role;
@@ -20,23 +20,9 @@ public class Employee implements GenerateID {
     private String userID;
 
 
-    public Employee() {
-    }
+    public Employee(){};
 
-    ;
-
-    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.department = department;
-        this.phoneNumber = phoneNumber;
-        this.salary = salary;
-        this.role = specialization;
-    }
-
-    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization, String userID) {
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, String salary, String specialization, String userID){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -56,10 +42,6 @@ public class Employee implements GenerateID {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -68,45 +50,29 @@ public class Employee implements GenerateID {
         return birthDate;
     }
 
-    public double getSalary() {
+    public String getSalary() {
         return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
     }
 
     public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getRole() {
         return role;
     }
 
-    public void setUserID(String userID) {
-        this.userID = this.userID;
-    }
-
-    public String getUserID() {
+    public String getUserID(){
         return userID;
     }
 
 
-    public String writeInfo() {
-        info = getFirstName() + "," + getLastName() + "," + getGender() + "," + getBirthDate() + "," + getDepartment() + "," + getPhoneNumber() + "," + getSalary() + "," + getRole() + "," + getUserID();
+    public String writeInfo(){
+        info = getFirstName()+","+getLastName()+","+getGender()+","+getBirthDate()+","+getDepartment()+","+getPhoneNumber()+","+getSalary()+","+ getRole()+","+getUserID();
         return info;
     }
 

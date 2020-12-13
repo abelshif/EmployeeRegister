@@ -1,8 +1,8 @@
-Salah,Abdinoor,Male,19950510,Cardiology,0706549023,53200.0,Doctor,SALAH_011
-Sven,Dalberg,Male,19670730,Cardiology,0738989222,65000.0,Doctor,SVEN_999
-Tymoteusz,Leach,Male,19791224,Cardiology,0765543234,32000.0,Nurse,TYMOTEUSZ_812
-Katarina,Svensson,Female,19650808,Cardiology,0704248798,38500.0,Nurse,KATARINA_111
-Lotta,Cholin,Female,19700922,Cardiology,0707453232,37500.0,Nurse,LOTTA_402
-Skylar,Figueroa,Female,19921125,Cardiology,0706549230,27000.0,Nurse,SKYLAR_190
-Harriette,Webb,Female,19840411,Cardiology,0704449910,31000.0,Nurse,HARRIETTE_700
-Antonina,Escobar,Female,19791001,Cardiology,0754389120,31200.0,Nurse,ANTONIA_229
+Salah,Abdinoor,Male,19950510,Cardiology,0706549023,53200,Doctor,SALAH_011
+Sven,Dalberg,Male,19670730,Cardiology,0738989222,65000,Doctor,SVEN_999
+Tymoteusz,Leach,Male,19791224,Cardiology,0765543234,32000,Nurse,TYMOTEUSZ_812
+Katarina,Svensson,Female,19650808,Cardiology,0704248798,38500,Nurse,KATARINA_111
+Lotta,Cholin,Female,19700922,Cardiology,0707453232,37500,Nurse,LOTTA_402
+Skylar,Figueroa,Female,19921125,Cardiology,0706549230,27000,Nurse,SKYLAR_190
+Harriette,Webb,Female,19840411,Cardiology,0704449910,31000,Nurse,HARRIETTE_700
+Antonina,Escobar,Female,19791001,Cardiology,0754389120,31200,Nurse,ANTONIA_229

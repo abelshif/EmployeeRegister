@@ -126,11 +126,16 @@ public class ManageEmployees {
         UpdateButton.setSize(100, 30);
         UpdateButton.setLocation(450, 370);
         UpdateButton.addActionListener(e -> {
-            JFrame updateFrame = new EditWindow(department, frame, authority);
+            String name =tabelmodel.getValueAt(table.getSelectedRow(),0).toString()+tabelmodel.getValueAt(table.getSelectedRow(),1).toString();
+            try {
+                updateEmployeeInfo(name, filePath, employeeList, department);
+            } catch (IOException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
         });
         frame.add(UpdateButton);
 
-        backToMenu = new JButton("Tillbaka");
+        backToMenu = new JButton("Back");
         backToMenu.setBounds(650, 470, 100 ,30);
         backToMenu.addActionListener(e -> {
             try {
@@ -239,7 +244,7 @@ public class ManageEmployees {
         File newFile = new File(filePath);
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         BufferedWriter writer2 = new BufferedWriter(new FileWriter(tempFile));
-        String name = JOptionPane.showInputDialog("userID på den anställda du vill ta bort eller flytta?");
+        String name = JOptionPane.showInputDialog("userID of the employee you would like to remove from departmen:");
         String employeeInfo = "";
 
         for (Employee e:list
@@ -273,9 +278,9 @@ public class ManageEmployees {
         newFile.delete();
         tempFile.renameTo(new File(filePath));
 
-        int userChoice = JOptionPane.showConfirmDialog(null,"Vill du flytta personen till en annan avdelning?");
+        int userChoice = JOptionPane.showConfirmDialog(null,"Would you like to move the employee to a different department?");
             if (userChoice == 0){
-                userChoice = JOptionPane.showOptionDialog(null, "Till vilken avdelning?", "Flytta anställd", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
+                userChoice = JOptionPane.showOptionDialog(null, "To which department?", "Move employee", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
                 if (userChoice == 0){
                     tempDep = employeeInfo.replace(department, "Cardiology");
                     SwapDepartment(tempDep, cardiologyFile);
@@ -296,32 +301,7 @@ public class ManageEmployees {
                     System.out.println("Anställd borttagen");
             }
 
-        DAO dao = new DAO();
-
-        switch (department) {
-            case cardiology -> {
-                new ManageEmployees(dao.cardiologyList,cardiologyFile, department,authority);
-            }
-            case anaesthetics -> {
-                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department,authority);
-            }
-            case surgery -> {
-                new ManageEmployees(dao.surgeryList,surgeryFile, department,authority);
-            }
-            case criticalCare -> {
-                new ManageEmployees(dao.criticalCareList,criticalCareFile, department,authority);
-            }
-        }
-
-
-
-        frame.dispose();
-        frame.revalidate();
-        frame.repaint();
-
-
-
-
+        repaintFrame(department);
     }
 
     private void SwapDepartment(String employeeInfo, String filePath) throws IOException {
@@ -348,6 +328,108 @@ public class ManageEmployees {
         }
         writer.close();
         s.close();
+    }
+
+    public void updateEmployeeInfo(String employeeInfo, String filePath, List<Employee> list, String department) throws IOException {
+        String[] updateOptions = {"Salary", "Phone number"};
+
+        int input = JOptionPane.showOptionDialog(null, "What information are you looking to change?", "Employee information",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, updateOptions, updateOptions[0]);
+        String updatedInformation = JOptionPane.showInputDialog("Vad vill du ändra det till?");
+
+        String data;
+        String salary = null;
+        String phoneNumber = null;
+        String newEmployeeInfo = null;
+
+        for (Employee e:list
+        ) {
+            if ((e.getFirstName() + e.getLastName()).equalsIgnoreCase(employeeInfo)) {
+                employeeInfo = e.writeInfo();
+                System.out.println(employeeInfo);
+            }
+        }
+
+        s = new Scanner(new FileReader(filePath));
+        try {
+
+            while (s.hasNextLine()) {
+                data = s.nextLine();
+                if (data.isEmpty()){
+                    continue;
+                }
+                String[] temp = data.split(",");
+                phoneNumber = temp[5];
+                salary = temp[6];
+
+            }
+            s.close();
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+
+        if (input == 0){
+            newEmployeeInfo = employeeInfo.replace(salary, updatedInformation);
+        }
+        else if (input == 1){
+            newEmployeeInfo = employeeInfo.replace(phoneNumber, updatedInformation);
+        }
+
+        File tempFile = new File("Lists\\tempEmployeeList");
+        File newFile = new File(filePath);
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        BufferedWriter writer2 = new BufferedWriter(new FileWriter(tempFile));
+
+        String currentLine = "";
+        try {
+
+            while ((currentLine = reader.readLine()) != null){
+                if (!currentLine.trim().equals(employeeInfo)){
+                    writer2.write(currentLine+"\n");
+                    writer2.flush();
+                }
+                else if (currentLine.trim().equals(employeeInfo)){
+                    writer2.write(newEmployeeInfo+"\n");
+                    writer2.flush();
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        writer2.close();
+        reader.close();
+
+        newFile.delete();
+        tempFile.renameTo(new File(filePath));
+
+        repaintFrame(department);
+
+
+    }
+
+    private void repaintFrame(String department) throws FileNotFoundException {
+        DAO dao = new DAO();
+
+        switch (department) {
+            case cardiology -> {
+                new ManageEmployees(dao.cardiologyList,cardiologyFile, department,authority);
+            }
+            case anaesthetics -> {
+                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department,authority);
+            }
+            case surgery -> {
+                new ManageEmployees(dao.surgeryList,surgeryFile, department,authority);
+            }
+            case criticalCare -> {
+                new ManageEmployees(dao.criticalCareList,criticalCareFile, department,authority);
+            }
+        }
+
+        frame.dispose();
+        frame.revalidate();
+        frame.repaint();
     }
 
 
