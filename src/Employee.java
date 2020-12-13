@@ -12,7 +12,7 @@ public class Employee implements GenerateID {
     private String lastName;
     private String gender;
     private String birthDate;
-    private double salary;
+    private String salary;
     private String department;
     private String phoneNumber;
     private String role;
@@ -22,7 +22,7 @@ public class Employee implements GenerateID {
 
     public Employee(){};
 
-    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, double salary, String specialization, String userID){
+    public Employee(String firstName, String lastName, String gender, String birthDate, String department, String phoneNumber, String salary, String specialization, String userID){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -34,67 +34,41 @@ public class Employee implements GenerateID {
         this.userID = userID;
     }
 
-
-
-
     public String getFirstName() {
         return firstName;
     }
 
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getGender() {
         return gender;
     }
 
-
     public String getBirthDate() {
         return birthDate;
     }
 
-
-    public double getSalary() {
+    public String getSalary() {
         return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
     }
 
     public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getRole() {
         return role;
     }
 
-    public void setUserID(String userID){
-        this.userID = this.userID;
-    }
     public String getUserID(){
         return userID;
     }
-
 
 
     public String writeInfo(){

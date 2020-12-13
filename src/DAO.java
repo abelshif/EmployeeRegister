@@ -22,7 +22,7 @@ public class DAO {
     private String lastName;
     private String gender;
     private String birthDate;
-    private double salary;
+    private String salary;
     private String department;
     private String phoneNumber;
     private String specialization;
@@ -83,7 +83,7 @@ public class DAO {
                     birthDate = temp[3];
                     department = temp[4];
                     phoneNumber = temp[5];
-                    salary = Double.parseDouble(temp[6]);
+                    salary = temp[6];
                     specialization = temp[7];
                     userID = temp[8];
 
