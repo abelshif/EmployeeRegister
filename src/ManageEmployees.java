@@ -135,7 +135,7 @@ public class ManageEmployees {
         });
         frame.add(UpdateButton);
 
-        backToMenu = new JButton("Tillbaka");
+        backToMenu = new JButton("Back");
         backToMenu.setBounds(650, 470, 100 ,30);
         backToMenu.addActionListener(e -> {
             try {
@@ -244,7 +244,7 @@ public class ManageEmployees {
         File newFile = new File(filePath);
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         BufferedWriter writer2 = new BufferedWriter(new FileWriter(tempFile));
-        String name = JOptionPane.showInputDialog("userID på den anställda du vill ta bort eller flytta?");
+        String name = JOptionPane.showInputDialog("userID of the employee you would like to remove from departmen:");
         String employeeInfo = "";
 
         for (Employee e:list
@@ -278,9 +278,9 @@ public class ManageEmployees {
         newFile.delete();
         tempFile.renameTo(new File(filePath));
 
-        int userChoice = JOptionPane.showConfirmDialog(null,"Vill du flytta personen till en annan avdelning?");
+        int userChoice = JOptionPane.showConfirmDialog(null,"Would you like to move the employee to a different department?");
             if (userChoice == 0){
-                userChoice = JOptionPane.showOptionDialog(null, "Till vilken avdelning?", "Flytta anställd", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
+                userChoice = JOptionPane.showOptionDialog(null, "To which department?", "Move employee", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
                 if (userChoice == 0){
                     tempDep = employeeInfo.replace(department, "Cardiology");
                     SwapDepartment(tempDep, cardiologyFile);
